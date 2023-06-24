@@ -13,6 +13,7 @@
 		78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3742A42983600A0EDF3 /* ContentView.swift */; };
 		78FDA3772A42983700A0EDF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78FDA3762A42983700A0EDF3 /* Assets.xcassets */; };
 		78FDA37A2A42983700A0EDF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78FDA3792A42983700A0EDF3 /* Preview Assets.xcassets */; };
+		78FDA3812A429B7E00A0EDF3 /* WarmupStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3802A429B7E00A0EDF3 /* WarmupStepView.swift */; };
 		78FDA3832A433D6B00A0EDF3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3822A433D6B00A0EDF3 /* Enums.swift */; };
 		78FDA38E2A435F1500A0EDF3 /* IntervalBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA38D2A435F1500A0EDF3 /* IntervalBlockView.swift */; };
 		78FDA3902A43BDE200A0EDF3 /* IntervalBlockExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA38F2A43BDE200A0EDF3 /* IntervalBlockExtensions.swift */; };
@@ -30,6 +31,7 @@
 		78FDA3742A42983600A0EDF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78FDA3762A42983700A0EDF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78FDA3792A42983700A0EDF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		78FDA3802A429B7E00A0EDF3 /* WarmupStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarmupStepView.swift; sourceTree = "<group>"; };
 		78FDA3822A433D6B00A0EDF3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		78FDA38D2A435F1500A0EDF3 /* IntervalBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalBlockView.swift; sourceTree = "<group>"; };
 		78FDA38F2A43BDE200A0EDF3 /* IntervalBlockExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalBlockExtensions.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				78FDA3722A42983600A0EDF3 /* WorkoutBuilderApp.swift */,
 				78FDA3742A42983600A0EDF3 /* ContentView.swift */,
 				78FDA3762A42983700A0EDF3 /* Assets.xcassets */,
+				78FDA3882A43581E00A0EDF3 /* WarmupStep */,
 				78FDA38C2A435F0200A0EDF3 /* IntervalBlock */,
 				78FDA3912A43C35800A0EDF3 /* BlockStep */,
 				78FDA39A2A43CCFC00A0EDF3 /* Extensions */,
@@ -87,6 +90,14 @@
 				78FDA3792A42983700A0EDF3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		78FDA3882A43581E00A0EDF3 /* WarmupStep */ = {
+			isa = PBXGroup;
+			children = (
+				78FDA3802A429B7E00A0EDF3 /* WarmupStepView.swift */,
+			);
+			path = WarmupStep;
 			sourceTree = "<group>";
 		};
 		78FDA38C2A435F0200A0EDF3 /* IntervalBlock */ = {
@@ -197,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78FDA3902A43BDE200A0EDF3 /* IntervalBlockExtensions.swift in Sources */,
+				78FDA3812A429B7E00A0EDF3 /* WarmupStepView.swift in Sources */,
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				78FDA3832A433D6B00A0EDF3 /* Enums.swift in Sources */,
 				78FDA38E2A435F1500A0EDF3 /* IntervalBlockView.swift in Sources */,
