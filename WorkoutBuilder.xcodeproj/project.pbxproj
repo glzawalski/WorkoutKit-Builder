@@ -75,7 +75,6 @@
 			children = (
 				78FDA3722A42983600A0EDF3 /* WorkoutBuilderApp.swift */,
 				78FDA3742A42983600A0EDF3 /* ContentView.swift */,
-				78FDA3762A42983700A0EDF3 /* Assets.xcassets */,
 				78FDA3882A43581E00A0EDF3 /* WarmupStep */,
 				78FDA38C2A435F0200A0EDF3 /* IntervalBlock */,
 				78FDA3912A43C35800A0EDF3 /* BlockStep */,
@@ -83,6 +82,7 @@
 				78FDA39A2A43CCFC00A0EDF3 /* Extensions */,
 				78FDA39D2A43CEBE00A0EDF3 /* Helpers */,
 				78FDA3782A42983700A0EDF3 /* Preview Content */,
+				78FDA3762A42983700A0EDF3 /* Assets.xcassets */,
 			);
 			path = WorkoutBuilder;
 			sourceTree = "<group>";
