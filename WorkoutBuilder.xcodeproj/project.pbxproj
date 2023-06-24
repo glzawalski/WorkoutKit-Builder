@@ -14,6 +14,7 @@
 		78FDA3772A42983700A0EDF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78FDA3762A42983700A0EDF3 /* Assets.xcassets */; };
 		78FDA37A2A42983700A0EDF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78FDA3792A42983700A0EDF3 /* Preview Assets.xcassets */; };
 		78FDA3832A433D6B00A0EDF3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3822A433D6B00A0EDF3 /* Enums.swift */; };
+		78FDA38E2A435F1500A0EDF3 /* IntervalBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA38D2A435F1500A0EDF3 /* IntervalBlockView.swift */; };
 		78FDA3902A43BDE200A0EDF3 /* IntervalBlockExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA38F2A43BDE200A0EDF3 /* IntervalBlockExtensions.swift */; };
 		78FDA3932A43C36800A0EDF3 /* BlockStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3922A43C36800A0EDF3 /* BlockStepView.swift */; };
 		78FDA3972A43CB9000A0EDF3 /* BlockStepExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3962A43CB9000A0EDF3 /* BlockStepExtension.swift */; };
@@ -30,6 +31,7 @@
 		78FDA3762A42983700A0EDF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78FDA3792A42983700A0EDF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		78FDA3822A433D6B00A0EDF3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		78FDA38D2A435F1500A0EDF3 /* IntervalBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalBlockView.swift; sourceTree = "<group>"; };
 		78FDA38F2A43BDE200A0EDF3 /* IntervalBlockExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalBlockExtensions.swift; sourceTree = "<group>"; };
 		78FDA3922A43C36800A0EDF3 /* BlockStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockStepView.swift; sourceTree = "<group>"; };
 		78FDA3962A43CB9000A0EDF3 /* BlockStepExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockStepExtension.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				78FDA3722A42983600A0EDF3 /* WorkoutBuilderApp.swift */,
 				78FDA3742A42983600A0EDF3 /* ContentView.swift */,
 				78FDA3762A42983700A0EDF3 /* Assets.xcassets */,
+				78FDA38C2A435F0200A0EDF3 /* IntervalBlock */,
 				78FDA3912A43C35800A0EDF3 /* BlockStep */,
 				78FDA39A2A43CCFC00A0EDF3 /* Extensions */,
 				78FDA39D2A43CEBE00A0EDF3 /* Helpers */,
@@ -84,6 +87,14 @@
 				78FDA3792A42983700A0EDF3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		78FDA38C2A435F0200A0EDF3 /* IntervalBlock */ = {
+			isa = PBXGroup;
+			children = (
+				78FDA38D2A435F1500A0EDF3 /* IntervalBlockView.swift */,
+			);
+			path = IntervalBlock;
 			sourceTree = "<group>";
 		};
 		78FDA3912A43C35800A0EDF3 /* BlockStep */ = {
@@ -188,6 +199,7 @@
 				78FDA3902A43BDE200A0EDF3 /* IntervalBlockExtensions.swift in Sources */,
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				78FDA3832A433D6B00A0EDF3 /* Enums.swift in Sources */,
+				78FDA38E2A435F1500A0EDF3 /* IntervalBlockView.swift in Sources */,
 				78FDA39C2A43CD1100A0EDF3 /* WorkoutAlertExtension.swift in Sources */,
 				78B1E5802A46B30C00F17999 /* HKWorkoutActivityType.swift in Sources */,
 				78FDA3992A43CC8100A0EDF3 /* WorkoutGoalExtension.swift in Sources */,
