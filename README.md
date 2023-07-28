@@ -1,5 +1,5 @@
 # WorkoutBuilder
-Sample project leveraging Apple's newest WorkoutKit SDK. As of June 24th 2023 you will need XCode 15 beta and iOS 17 beta simulator to run this project.
+Sample project leveraging Apple's newest WorkoutKit SDK. As of June 24th 2023 you will need Xcode 15.0 beta (15A5160n, untested in other versions) and iOS 17 beta simulator to run this project.
 
 <table>
   <tr>
