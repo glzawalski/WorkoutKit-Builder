@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var location: HKWorkoutSessionLocationType = .unknown
     @State private var displayName: String = ""
 
-    @State private var warmupStep: WarmupStep?
+    @State private var warmupStep: WorkoutStep?
     @State private var addWarmup: Bool = false
 
     @State private var intervalBlocks: [IntervalBlock] = []
@@ -22,11 +22,17 @@ struct ContentView: View {
     @State private var addIntervalBlock: Bool = false
     @State private var editIntervalBlock: Bool = false
 
-    @State private var cooldownStep: CooldownStep?
+    @State private var cooldownStep: WorkoutStep?
     @State private var addCooldown: Bool = false
 
     @State private var presentAlert: Bool = false
     @State private var alertText: String = ""
+
+    @State private var presentWorkout: Bool = false
+
+    private var workoutPlan: WorkoutPlan {
+        return .init(.custom(CustomWorkout(activity: type, location: location, displayName: displayName, warmup: warmupStep, blocks: intervalBlocks, cooldown: cooldownStep)))
+    }
 
     var body: some View {
         Form {
@@ -45,7 +51,7 @@ struct ContentView: View {
             presentWorkoutPreviewButton
         }
         .sheet(isPresented: $addWarmup) {
-            WarmupStepView(warmupStep: $warmupStep, title: warmupStep == nil ? "Add Warmup" : "Edit Warmup")
+            WorkoutStepView(workoutStep: $warmupStep, title: "Add Warmup")
         }
         .sheet(isPresented: $addIntervalBlock) {
             IntervalBlockView(intervalBlocks: $intervalBlocks, selectedBlock: .constant(nil), addingNew: true)
@@ -54,7 +60,7 @@ struct ContentView: View {
             IntervalBlockView(intervalBlocks: $intervalBlocks, selectedBlock: $selectedBlock, addingNew: false)
         }
         .sheet(isPresented: $addCooldown) {
-            CooldownStepView(cooldownStep: $cooldownStep, title: cooldownStep == nil ? "Add Cooldown" : "Edit Cooldown")
+            WorkoutStepView(workoutStep: $cooldownStep, title: "Add Cooldown")
         }
         .alert(alertText, isPresented: $presentAlert) {
             Button {
@@ -63,6 +69,7 @@ struct ContentView: View {
                 Text("OK")
             }
         }
+        .workoutPreview(workoutPlan, isPresented: $presentWorkout)
     }
 }
 
@@ -104,12 +111,12 @@ private extension ContentView {
                     VStack(alignment: .leading) {
                         HStack {
                             Image(systemName: "checkmark.square")
-                            Text(": \(warmupStep.goal?.description ?? "No goal")")
+                            Text(": \(warmupStep.goal.description)")
                         }
-                        
+
                         HStack {
                             Image(systemName: "bell.circle")
-                            Text(": \(warmupStep.alert?.description ?? "No alert")")
+                            Text(": \(warmupStep.alert.debugDescription)")
                         }
                     }
 
@@ -136,15 +143,15 @@ private extension ContentView {
                 ForEach(0..<intervalBlocks.count, id: \.self) { index in
                     VStack(alignment: .leading, spacing: 5) {
                         let block = intervalBlocks[index]
-                        
+
                         HStack {
                             ForEach(block.steps) { step in
-                                Image(systemName: step.type.icon)
+                                Image(systemName: step.purpose.icon)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(height: 20)
                             }
-                            
+
                             Image(systemName: "repeat")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -180,12 +187,12 @@ private extension ContentView {
                     VStack(alignment: .leading) {
                         HStack {
                             Image(systemName: "checkmark.square")
-                            Text(": \(cooldownStep.goal?.description ?? "No goal")")
+                            Text(": \(cooldownStep.goal.description)")
                         }
 
                         HStack {
                             Image(systemName: "bell.circle")
-                            Text(": \(cooldownStep.alert?.description ?? "No alert")")
+                            Text(": \(cooldownStep.alert.debugDescription)")
                         }
                     }
 
@@ -208,25 +215,11 @@ private extension ContentView {
 
     var presentWorkoutPreviewButton: some View {
         Button {
-            do {
-                let composition = try createCustomWorkoutComposition()
-                let customWorkout = WorkoutComposition(customComposition: composition)
-
-                Task {
-                    try await customWorkout.presentPreview()
-                }
-            } catch {
-                alertText = error.localizedDescription
-                presentAlert.toggle()
-            }
+            presentWorkout.toggle()
         } label: {
             Text("Present Preview")
         }
 
-    }
-
-    func createCustomWorkoutComposition() throws -> CustomWorkoutComposition {
-        return try CustomWorkoutComposition(activity: type, location: location, displayName: displayName, warmup: warmupStep, blocks: intervalBlocks, cooldown: cooldownStep)
     }
 }
 
