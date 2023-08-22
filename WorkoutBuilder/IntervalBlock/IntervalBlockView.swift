@@ -15,7 +15,7 @@ struct IntervalBlockView: View {
     @Binding var selectedBlock: Int?
     private var addingNew: Bool
 
-    @State private var steps: [BlockStep]
+    @State private var steps: [IntervalStep]
     @State private var iterations: Int
 
     @State private var selectedStep: Int?
@@ -45,16 +45,16 @@ struct IntervalBlockView: View {
                     ForEach(0..<steps.count, id: \.self) { index in
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\(steps[index].type.description)")
+                                Text("\(steps[index].purpose.description)")
 
                                 HStack {
                                     Image(systemName: "checkmark.square")
-                                    Text(": \(steps[index].goal?.description ?? "No goal")")
+                                    Text(": \(steps[index].step.goal.description)")
                                 }
 
                                 HStack {
                                     Image(systemName: "bell.circle")
-                                    Text(": \(steps[index].alert?.description ?? "No alert")")
+                                    Text(": \(steps[index].step.alert.debugDescription)")
                                 }
                             }
 
@@ -82,10 +82,10 @@ struct IntervalBlockView: View {
                 }
             }
             .sheet(isPresented: $addStep) {
-                BlockStepView(blockSteps: $steps, selectedStep: .constant(nil), addingNew: true)
+                BlockStepView(intervalSteps: $steps, selectedStep: $selectedStep, addingNew: true)
             }
             .sheet(isPresented: $editStep) {
-                BlockStepView(blockSteps: $steps, selectedStep: $selectedStep, addingNew: false)
+                BlockStepView(intervalSteps: $steps, selectedStep: $selectedStep, addingNew: false)
             }
             .navigationTitle(addingNew ? "Add New Block" : "Edit Block")
             .toolbar {
@@ -137,16 +137,16 @@ private extension IntervalBlockView {
             [
                 IntervalBlock(
                     steps: [
-                        BlockStep( .work, goal: nil, alert: nil),
-                        BlockStep( .work, goal: nil, alert: nil),
-                        BlockStep( .rest, goal: nil, alert: nil),
+                        IntervalStep( .work, goal: .open, alert: nil),
+                        IntervalStep( .work, goal: .open, alert: nil),
+                        IntervalStep( .recovery, goal: .open, alert: nil),
                     ],
                     iterations: 3
                 ),
                 IntervalBlock(
                     steps: [
-                        BlockStep( .work, goal: nil, alert: nil),
-                        BlockStep( .rest, goal: nil, alert: nil),
+                        IntervalStep( .work, goal: .open, alert: nil),
+                        IntervalStep( .recovery, goal: .open, alert: nil),
                     ],
                     iterations: 5
                 ),

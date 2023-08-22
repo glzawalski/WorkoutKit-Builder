@@ -8,17 +8,17 @@
 import Foundation
 import WorkoutKit
 
-extension BlockStep: Identifiable {
+extension IntervalStep: Identifiable {
     public var id: UUID {
         return UUID()
     }
 }
 
-extension BlockStep.StepType {
+extension IntervalStep.Purpose {
     var icon: String {
         switch self {
         case .work: return "dumbbell"
-        case .rest: return "zzz"
+        case .recovery: return "zzz"
         @unknown default: return ""
         }
     }
@@ -26,7 +26,7 @@ extension BlockStep.StepType {
     var description: String {
         switch self {
         case .work: return "Work"
-        case .rest: return "Rest"
+        case .recovery: return "Rest"
         @unknown default: return ""
         }
     }
