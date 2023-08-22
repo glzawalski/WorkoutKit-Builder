@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */; };
 		78A9658A2A94491000A606A4 /* WorkoutAlertSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965892A94491000A606A4 /* WorkoutAlertSection.swift */; };
+		78A9658C2A946CB700A606A4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A9658B2A946CB700A606A4 /* Functions.swift */; };
 		78B1E5802A46B30C00F17999 /* HKWorkoutActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1E57F2A46B30C00F17999 /* HKWorkoutActivityType.swift */; };
 		78B1E5822A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1E5812A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift */; };
 		78FDA3732A42983600A0EDF3 /* WorkoutBuilderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3722A42983600A0EDF3 /* WorkoutBuilderApp.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGoalSection.swift; sourceTree = "<group>"; };
 		78A965892A94491000A606A4 /* WorkoutAlertSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertSection.swift; sourceTree = "<group>"; };
+		78A9658B2A946CB700A606A4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		78B1E57F2A46B30C00F17999 /* HKWorkoutActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKWorkoutActivityType.swift; sourceTree = "<group>"; };
 		78B1E5812A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKWorkoutSessionLocationType.swift; sourceTree = "<group>"; };
 		78FDA36F2A42983600A0EDF3 /* WorkoutBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				78FDA3822A433D6B00A0EDF3 /* Enums.swift */,
+				78A9658B2A946CB700A606A4 /* Functions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			files = (
 				78FDA3902A43BDE200A0EDF3 /* IntervalBlockExtensions.swift in Sources */,
 				78FDA3872A43580700A0EDF3 /* WorkoutStepView.swift in Sources */,
+				78A9658C2A946CB700A606A4 /* Functions.swift in Sources */,
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */,
 				78FDA3832A433D6B00A0EDF3 /* Enums.swift in Sources */,
