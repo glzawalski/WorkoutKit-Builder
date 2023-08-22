@@ -129,3 +129,8 @@ private extension BlockStepView {
 #Preview {
     BlockStepView(intervalSteps: .constant([]), selectedStep: .constant(nil), addingNew: false)
 }
+
+enum StepType: String, CaseIterable {
+    case work = "Work"
+    case recovery = "Recovery"
+}
