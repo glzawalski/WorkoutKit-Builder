@@ -7,11 +7,14 @@
 
 import SwiftUI
 import WorkoutKit
+import HealthKit
 
 struct WorkoutStepView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var workoutStep: WorkoutStep?
     private var title: String
+    private var type: HKWorkoutActivityType
+    private var location: HKWorkoutSessionLocationType
 
     @State private var goalType: GoalType
     @State private var goalUnit: GoalUnit?
@@ -25,9 +28,14 @@ struct WorkoutStepView: View {
     @State private var alertRangeMaxValue: Double = .zero
     @State private var alertZoneValue: Int = .zero
 
-    init(workoutStep: Binding<WorkoutStep?>, title: String) {
+    @State private var presentAlert: Bool = false
+    @State private var alertText: String = ""
+
+    init(workoutStep: Binding<WorkoutStep?>, title: String, type: HKWorkoutActivityType, location: HKWorkoutSessionLocationType) {
         _workoutStep = workoutStep
         self.title = title
+        self.type = type
+        self.location = location
 
         switch workoutStep.wrappedValue?.goal {
         case .open:
@@ -105,16 +113,52 @@ struct WorkoutStepView: View {
     var body: some View {
         NavigationStack {
             Form {
-                WorkoutGoalSection(type: $goalType, unit: $goalUnit, value: $goalValue)
+                WorkoutGoalSection(
+                    type: $goalType,
+                    unit: $goalUnit,
+                    value: $goalValue
+                )
 
-                WorkoutAlertSection(type: $alertType, unit: $alertUnit, metric: $alertMetric, thresholdValue: $alertThresholdValue, rangeMinValue: $alertRangeMinValue, rangeMaxValue: $alertRangeMaxValue, zoneValue: $alertZoneValue)
+                WorkoutAlertSection(
+                    type: $alertType,
+                    unit: $alertUnit,
+                    metric: $alertMetric,
+                    thresholdValue: $alertThresholdValue,
+                    rangeMinValue: $alertRangeMinValue,
+                    rangeMaxValue: $alertRangeMaxValue,
+                    zoneValue: $alertZoneValue
+                )
             }
             .navigationTitle(title)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        workoutStep = createWorkoutStep(goalUnit: goalUnit, goalType: goalType, goalValue: goalValue, alertUnit: alertUnit, alertMetric: alertMetric, alertType: alertType, alertThresholdValue: alertThresholdValue, alertRangeMinValue: alertRangeMinValue, alertRangeMaxValue: alertRangeMaxValue, alertZoneValue: alertZoneValue)
-                        dismiss()
+                        do {
+                            workoutStep = try createWorkoutStep(
+                                goalUnit: goalUnit,
+                                goalType: goalType,
+                                goalValue: goalValue,
+                                alertUnit: alertUnit,
+                                alertMetric: alertMetric,
+                                alertType: alertType,
+                                alertThresholdValue: alertThresholdValue,
+                                alertRangeMinValue: alertRangeMinValue,
+                                alertRangeMaxValue: alertRangeMaxValue,
+                                alertZoneValue: alertZoneValue,
+                                activityType: type,
+                                activityLocation: location
+                            )
+                            dismiss()
+                        } catch WorkoutStepError.unsupportedAlert {
+                            alertText = "Unsupported Alert"
+                            presentAlert.toggle()
+                        } catch WorkoutStepError.unsupportedGoal {
+                            alertText = "Unsupported Goal"
+                            presentAlert.toggle()
+                        } catch {
+                            alertText = "Unsupported Goal or Alert"
+                            presentAlert.toggle()
+                        }
                     } label: {
                         Image(systemName: "plus.circle")
                     }
@@ -126,6 +170,13 @@ struct WorkoutStepView: View {
                     } label: {
                         Image(systemName: "trash")
                     }
+                }
+            }
+            .alert(alertText, isPresented: $presentAlert) {
+                Button {
+                    presentAlert.toggle()
+                } label: {
+                    Text("OK")
                 }
             }
         }
@@ -140,6 +191,8 @@ struct WorkoutStepView: View {
                 alert: CadenceThresholdAlert(target: Measurement(value: 1, unit: UnitFrequency(symbol: "Hz")))
             )
         ),
-        title: "Add Cooldown"
+        title: "Add Cooldown",
+        type: .other,
+        location: .outdoor
     )
 }

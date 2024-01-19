@@ -31,7 +31,18 @@ struct ContentView: View {
     @State private var presentWorkout: Bool = false
 
     private var workoutPlan: WorkoutPlan {
-        return .init(.custom(CustomWorkout(activity: type, location: location, displayName: displayName, warmup: warmupStep, blocks: intervalBlocks, cooldown: cooldownStep)))
+        return .init(
+            .custom(
+                CustomWorkout(
+                    activity: type,
+                    location: location,
+                    displayName: displayName,
+                    warmup: warmupStep,
+                    blocks: intervalBlocks,
+                    cooldown: cooldownStep
+                )
+            )
+        )
     }
 
     var body: some View {
@@ -51,16 +62,38 @@ struct ContentView: View {
             presentWorkoutPreviewButton
         }
         .sheet(isPresented: $addWarmup) {
-            WorkoutStepView(workoutStep: $warmupStep, title: "Add Warmup")
+            WorkoutStepView(
+                workoutStep: $warmupStep,
+                title: "Add Warmup",
+                type: type,
+                location: location
+            )
         }
         .sheet(isPresented: $addIntervalBlock) {
-            IntervalBlockView(intervalBlocks: $intervalBlocks, selectedBlock: .constant(nil), addingNew: true)
+            IntervalBlockView(
+                intervalBlocks: $intervalBlocks,
+                selectedBlock: .constant(nil),
+                addingNew: true,
+                type: type,
+                location: location
+            )
         }
         .sheet(isPresented: $editIntervalBlock) {
-            IntervalBlockView(intervalBlocks: $intervalBlocks, selectedBlock: $selectedBlock, addingNew: false)
+            IntervalBlockView(
+                intervalBlocks: $intervalBlocks,
+                selectedBlock: $selectedBlock,
+                addingNew: false,
+                type: type,
+                location: location
+            )
         }
         .sheet(isPresented: $addCooldown) {
-            WorkoutStepView(workoutStep: $cooldownStep, title: "Add Cooldown")
+            WorkoutStepView(
+                workoutStep: $cooldownStep,
+                title: "Add Cooldown",
+                type: type,
+                location: location
+            )
         }
         .alert(alertText, isPresented: $presentAlert) {
             Button {
@@ -77,7 +110,7 @@ private extension ContentView {
     var typePicker: some View {
         Section("Activity") {
             Picker("Type", selection: $type) {
-                ForEach(HKWorkoutActivityType.allCases, id: \.self) { item in
+                ForEach(HKWorkoutActivityType.supportedCases, id: \.self) { item in
                     Text("\(item.displayName)")
                         .tag(item)
                 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WorkoutKit
+import HealthKit
 
 struct IntervalBlockView: View {
     @Environment(\.dismiss) private var dismiss
@@ -14,6 +15,8 @@ struct IntervalBlockView: View {
     @Binding var intervalBlocks: [IntervalBlock]
     @Binding var selectedBlock: Int?
     private var addingNew: Bool
+    private var type: HKWorkoutActivityType
+    private var location: HKWorkoutSessionLocationType
 
     @State private var steps: [IntervalStep]
     @State private var iterations: Int
@@ -22,10 +25,12 @@ struct IntervalBlockView: View {
     @State private var addStep: Bool = false
     @State private var editStep: Bool = false
 
-    init(intervalBlocks: Binding<[IntervalBlock]>, selectedBlock: Binding<Int?>, addingNew: Bool) {
+    init(intervalBlocks: Binding<[IntervalBlock]>, selectedBlock: Binding<Int?>, addingNew: Bool, type: HKWorkoutActivityType, location: HKWorkoutSessionLocationType) {
         _intervalBlocks = intervalBlocks
         self._selectedBlock = selectedBlock
         self.addingNew = addingNew
+        self.type = type
+        self.location = location
 
         if let block = selectedBlock.wrappedValue {
             let intervalBlock = intervalBlocks[block]
@@ -82,10 +87,22 @@ struct IntervalBlockView: View {
                 }
             }
             .sheet(isPresented: $addStep) {
-                BlockStepView(intervalSteps: $steps, selectedStep: $selectedStep, addingNew: true)
+                BlockStepView(
+                    intervalSteps: $steps,
+                    selectedStep: $selectedStep,
+                    addingNew: true,
+                    type: type,
+                    location: location
+                )
             }
             .sheet(isPresented: $editStep) {
-                BlockStepView(intervalSteps: $steps, selectedStep: $selectedStep, addingNew: false)
+                BlockStepView(
+                    intervalSteps: $steps,
+                    selectedStep: $selectedStep,
+                    addingNew: false,
+                    type: type,
+                    location: location
+                )
             }
             .navigationTitle(addingNew ? "Add New Block" : "Edit Block")
             .toolbar {
@@ -153,6 +170,8 @@ private extension IntervalBlockView {
             ]
         ),
         selectedBlock: .constant(0),
-        addingNew: true
+        addingNew: true,
+        type: .other,
+        location: .unknown
     )
 }

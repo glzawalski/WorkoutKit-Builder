@@ -7,10 +7,99 @@
 
 import Foundation
 import HealthKit
+import WorkoutKit
 
 extension HKWorkoutActivityType: CaseIterable {
     public static var allCases: [HKWorkoutActivityType] {
-        return [.americanFootball, .archery, .australianFootball, .badminton, .barre, .baseball, .basketball, .bowling, .boxing, .cardioDance, .climbing, .cooldown, .coreTraining, .cricket, .crossCountrySkiing, .crossTraining, .curling, .cycling, .discSports, .downhillSkiing, .elliptical, .equestrianSports, .fencing, .fishing, .fitnessGaming, .flexibility, .functionalStrengthTraining, .golf, .gymnastics, .handCycling, .handball, .highIntensityIntervalTraining, .hiking, .hockey, .hunting, .jumpRope, .kickboxing, .lacrosse, .martialArts, .mindAndBody, .mixedCardio, .other, .paddleSports, .pickleball, .pilates, .play, .preparationAndRecovery, .racquetball, .rowing, .rugby, .running, .sailing, .skatingSports, .snowSports, .snowboarding, .soccer, .socialDance, .softball, .squash, .stairClimbing, .stairs, .stepTraining, .surfingSports, .swimBikeRun, .swimming, .tableTennis, .taiChi, .tennis, .trackAndField, .traditionalStrengthTraining, .transition, .underwaterDiving, .volleyball, .walking, .waterFitness, .waterPolo, .waterSports, .wheelchairRunPace, .wheelchairWalkPace, .wrestling, .yoga]
+        return [
+            .americanFootball,
+            .archery,
+            .australianFootball,
+            .badminton,
+            .barre,
+            .baseball,
+            .basketball,
+            .bowling,
+            .boxing,
+            .cardioDance,
+            .climbing,
+            .cooldown,
+            .coreTraining,
+            .cricket,
+            .crossCountrySkiing,
+            .crossTraining,
+            .curling,
+            .cycling,
+            .discSports,
+            .downhillSkiing,
+            .elliptical,
+            .equestrianSports,
+            .fencing,
+            .fishing,
+            .fitnessGaming,
+            .flexibility,
+            .functionalStrengthTraining,
+            .golf,
+            .gymnastics,
+            .handCycling,
+            .handball,
+            .highIntensityIntervalTraining,
+            .hiking,
+            .hockey,
+            .hunting,
+            .jumpRope,
+            .kickboxing,
+            .lacrosse,
+            .martialArts,
+            .mindAndBody,
+            .mixedCardio,
+            .other,
+            .paddleSports,
+            .pickleball,
+            .pilates,
+            .play,
+            .preparationAndRecovery,
+            .racquetball,
+            .rowing,
+            .rugby,
+            .running,
+            .sailing,
+            .skatingSports,
+            .snowSports,
+            .snowboarding,
+            .soccer,
+            .socialDance,
+            .softball,
+            .squash,
+            .stairClimbing,
+            .stairs,
+            .stepTraining,
+            .surfingSports,
+            .swimBikeRun,
+            .swimming,
+            .tableTennis,
+            .taiChi,
+            .tennis,
+            .trackAndField,
+            .traditionalStrengthTraining,
+            .transition,
+            .underwaterDiving,
+            .volleyball,
+            .walking,
+            .waterFitness,
+            .waterPolo,
+            .waterSports,
+            .wheelchairRunPace,
+            .wheelchairWalkPace,
+            .wrestling,
+            .yoga
+        ]
+    }
+
+    public static var supportedCases: [HKWorkoutActivityType] {
+        return allCases.filter { type in
+            CustomWorkout.supportsActivity(type)
+        }
     }
 
     var displayName: String {

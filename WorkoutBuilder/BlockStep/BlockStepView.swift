@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WorkoutKit
+import HealthKit
 
 struct BlockStepView: View {
     @Environment(\.dismiss) private var dismiss
@@ -14,6 +15,8 @@ struct BlockStepView: View {
     @Binding var intervalSteps: [IntervalStep]
     @Binding var selectedStep: Int?
     private var addingNew: Bool
+    private var type: HKWorkoutActivityType
+    private var location: HKWorkoutSessionLocationType
 
     @State private var stepType: StepType
 
@@ -29,10 +32,15 @@ struct BlockStepView: View {
     @State private var alertRangeMaxValue: Double = .zero
     @State private var alertZoneValue: Int = .zero
 
-    init(intervalSteps: Binding<[IntervalStep]>, selectedStep: Binding<Int?>, addingNew: Bool) {
+    @State private var presentAlert: Bool = false
+    @State private var alertText: String = ""
+
+    init(intervalSteps: Binding<[IntervalStep]>, selectedStep: Binding<Int?>, addingNew: Bool, type: HKWorkoutActivityType, location: HKWorkoutSessionLocationType) {
         _intervalSteps = intervalSteps
         self._selectedStep = selectedStep
         self.addingNew = addingNew
+        self.type = type
+        self.location = location
 
         if let step = selectedStep.wrappedValue {
             let intervalStep = intervalSteps[step]
@@ -84,16 +92,40 @@ struct BlockStepView: View {
                         case .recovery: purpose = .recovery
                         }
 
-                        let newStep = createWorkoutStep(goalUnit: goalUnit, goalType: goalType, goalValue: goalValue, alertUnit: alertUnit, alertMetric: alertMetric, alertType: alertType, alertThresholdValue: alertThresholdValue, alertRangeMinValue: alertRangeMinValue, alertRangeMaxValue: alertRangeMaxValue, alertZoneValue: alertZoneValue)
+                        do {
+                            let newStep = try createWorkoutStep(
+                                goalUnit: goalUnit,
+                                goalType: goalType,
+                                goalValue: goalValue,
+                                alertUnit: alertUnit,
+                                alertMetric: alertMetric,
+                                alertType: alertType,
+                                alertThresholdValue: alertThresholdValue,
+                                alertRangeMinValue: alertRangeMinValue,
+                                alertRangeMaxValue: alertRangeMaxValue,
+                                alertZoneValue: alertZoneValue,
+                                activityType: type,
+                                activityLocation: location
+                            )
 
-                        if addingNew {
-                            intervalSteps.append(.init(purpose, step: newStep))
-                        } else if let selectedStep {
-                            intervalSteps.remove(at: selectedStep)
-                            intervalSteps.insert(.init(purpose, step: newStep), at: selectedStep)
+                            if addingNew {
+                                intervalSteps.append(.init(purpose, step: newStep))
+                            } else if let selectedStep {
+                                intervalSteps.remove(at: selectedStep)
+                                intervalSteps.insert(.init(purpose, step: newStep), at: selectedStep)
+                            }
+
+                            dismiss()
+                        } catch WorkoutStepError.unsupportedAlert {
+                            alertText = "Unsupported Alert"
+                            presentAlert.toggle()
+                        } catch WorkoutStepError.unsupportedGoal {
+                            alertText = "Unsupported Goal"
+                            presentAlert.toggle()
+                        } catch {
+                            alertText = "Unsupported Goal or Alert"
+                            presentAlert.toggle()
                         }
-                        
-                        dismiss()
                     } label: {
                         Image(systemName: "plus.circle")
                     }
@@ -109,6 +141,13 @@ struct BlockStepView: View {
                     } label: {
                         Image(systemName: "trash")
                     }
+                }
+            }
+            .alert(alertText, isPresented: $presentAlert) {
+                Button {
+                    presentAlert.toggle()
+                } label: {
+                    Text("OK")
                 }
             }
         }
@@ -127,7 +166,13 @@ private extension BlockStepView {
 }
 
 #Preview {
-    BlockStepView(intervalSteps: .constant([]), selectedStep: .constant(nil), addingNew: false)
+    BlockStepView(
+        intervalSteps: .constant([]),
+        selectedStep: .constant(nil),
+        addingNew: false,
+        type: .other,
+        location: .outdoor
+    )
 }
 
 enum StepType: String, CaseIterable {

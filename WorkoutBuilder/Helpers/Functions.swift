@@ -7,8 +7,27 @@
 
 import Foundation
 import WorkoutKit
+import HealthKit
 
-func createWorkoutStep(goalUnit: GoalUnit?, goalType: GoalType, goalValue: Double, alertUnit: AlertUnit?, alertMetric: AlertMetric?, alertType: AlertType?, alertThresholdValue: Double, alertRangeMinValue: Double, alertRangeMaxValue: Double, alertZoneValue: Int) -> WorkoutStep {
+enum WorkoutStepError: Error {
+    case unsupportedGoal
+    case unsupportedAlert
+}
+
+func createWorkoutStep(
+    goalUnit: GoalUnit?,
+    goalType: GoalType,
+    goalValue: Double,
+    alertUnit: AlertUnit?,
+    alertMetric: AlertMetric?,
+    alertType: AlertType?,
+    alertThresholdValue: Double,
+    alertRangeMinValue: Double,
+    alertRangeMaxValue: Double,
+    alertZoneValue: Int,
+    activityType: HKWorkoutActivityType,
+    activityLocation: HKWorkoutSessionLocationType
+) throws -> WorkoutStep {
     var lenght: UnitLength = .meters
     var energy: UnitEnergy = .calories
     var duration: UnitDuration = .seconds
@@ -37,6 +56,10 @@ func createWorkoutStep(goalUnit: GoalUnit?, goalType: GoalType, goalValue: Doubl
     case .energy: goal = .energy(goalValue, energy)
     case .time: goal = .time(goalValue, duration)
     case .open: goal = .open
+    }
+
+    guard CustomWorkout.supportsGoal(goal, activity: activityType, location: activityLocation) else {
+        throw WorkoutStepError.unsupportedGoal
     }
 
     var frequency: UnitFrequency = .hertz
@@ -103,6 +126,12 @@ func createWorkoutStep(goalUnit: GoalUnit?, goalType: GoalType, goalValue: Doubl
 
     case .none:
         alert = nil
+    }
+
+    if let alert {
+        guard CustomWorkout.supportsAlert(alert, activity: activityType, location: activityLocation) else {
+            throw WorkoutStepError.unsupportedAlert
+        }
     }
 
     return WorkoutStep(goal: goal, alert: alert)
