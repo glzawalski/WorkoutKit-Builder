@@ -21,17 +21,6 @@ struct WorkoutAlertSection: View {
     var body: some View {
         Section("Alert") {
             typePicker
-        }
-    }
-}
-
-extension WorkoutAlertSection {
-    var typePicker: some View {
-        Picker("Type", selection: $type) {
-            ForEach(AlertType.allCases, id: \.self) { item in
-                Text("\(item.rawValue)")
-                    .tag(item)
-            }
 
             switch type {
             case .cadenceRange:
@@ -77,39 +66,60 @@ extension WorkoutAlertSection {
             }
         }
     }
+}
+
+extension WorkoutAlertSection {
+    var typePicker: some View {
+        Picker("Type", selection: $type) {
+            Text("None")
+                .tag(nil as AlertType?)
+            ForEach(AlertType.allCases, id: \.self) { item in
+                Text("\(item.rawValue)")
+                    .tag(item as AlertType?)
+            }
+        }
+    }
 
     var frequencyUnitPicker: some View {
         Picker("Unit", selection: $unit) {
+            Text("None")
+                .tag(nil as AlertUnit?)
             ForEach(AlertUnit.frequencyCases, id: \.self) { item in
                 Text("\(item.rawValue)")
-                    .tag(item)
+                    .tag(item as AlertUnit?)
             }
         }
     }
 
     var powerUnitPicker: some View {
         Picker("Unit", selection: $unit) {
+            Text("None")
+                .tag(nil as AlertUnit?)
             ForEach(AlertUnit.powerCases, id: \.self) { item in
                 Text("\(item.rawValue)")
-                    .tag(item)
+                    .tag(item as AlertUnit?)
             }
         }
     }
 
     var speedUnitPicker: some View {
         Picker("Unit", selection: $unit) {
+            Text("None")
+                .tag(nil as AlertUnit?)
             ForEach(AlertUnit.speedCases, id: \.self) { item in
                 Text("\(item.rawValue)")
-                    .tag(item)
+                    .tag(item as AlertUnit?)
             }
         }
     }
 
     var metricPicker: some View {
         Picker("Metric", selection: $metric) {
+            Text("None")
+                .tag(nil as AlertMetric?)
             ForEach(AlertMetric.allCases, id: \.self) { item in
                 Text("\(item.rawValue)")
-                    .tag(item)
+                    .tag(item as AlertMetric?)
             }
         }
     }

@@ -48,27 +48,33 @@ extension WorkoutGoalSection {
 
     var lengthUnitPicker: some View {
         Picker("Unit", selection: $unit) {
+            Text("None")
+                .tag(nil as GoalUnit?)
             ForEach(GoalUnit.lengthCases, id: \.self) { item in
                 Text("\(item.rawValue)")
-                    .tag(item)
+                    .tag(item as GoalUnit?)
             }
         }
     }
 
     var energyUnitPicker: some View {
         Picker("Unit", selection: $unit) {
+            Text("None")
+                .tag(nil as GoalUnit?)
             ForEach(GoalUnit.energyCases, id: \.self) { item in
                 Text("\(item.rawValue)")
-                    .tag(item)
+                    .tag(item as GoalUnit?)
             }
         }
     }
 
     var timeUnitPicker: some View {
         Picker("Unit", selection: $unit) {
+            Text("None")
+                .tag(nil as GoalUnit?)
             ForEach(GoalUnit.timeCases, id: \.self) { item in
                 Text("\(item.rawValue)")
-                    .tag(item)
+                    .tag(item as GoalUnit?)
             }
         }
     }
