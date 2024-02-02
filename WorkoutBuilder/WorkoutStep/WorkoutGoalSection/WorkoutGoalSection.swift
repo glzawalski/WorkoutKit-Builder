@@ -84,6 +84,7 @@ extension WorkoutGoalSection {
             Text("Value")
             TextField("Goal Value", value: $value, formatter: NumberFormatter())
                 .multilineTextAlignment(.trailing)
+                .keyboardType(.numberPad)
         }
     }
 }

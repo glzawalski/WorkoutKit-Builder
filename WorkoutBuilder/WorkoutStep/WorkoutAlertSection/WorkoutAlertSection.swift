@@ -129,6 +129,7 @@ extension WorkoutAlertSection {
             Text("Target Value")
             TextField("Target Value", value: $thresholdValue, formatter: NumberFormatter())
                 .multilineTextAlignment(.trailing)
+                .keyboardType(.numberPad)
         }
     }
 
@@ -138,12 +139,14 @@ extension WorkoutAlertSection {
                 Text("Min Value")
                 TextField("Range Min Value", value: $rangeMinValue, formatter: NumberFormatter())
                     .multilineTextAlignment(.trailing)
+                    .keyboardType(.numberPad)
             }
 
             HStack {
                 Text("Max Value")
                 TextField("Range Max Value", value: $rangeMaxValue, formatter: NumberFormatter())
                     .multilineTextAlignment(.trailing)
+                    .keyboardType(.numberPad)
             }
         }
     }
@@ -153,6 +156,7 @@ extension WorkoutAlertSection {
             Text("Zone Value")
             TextField("Zone Value", value: $zoneValue, formatter: NumberFormatter())
                 .multilineTextAlignment(.trailing)
+                .keyboardType(.numberPad)
         }
     }
 }
