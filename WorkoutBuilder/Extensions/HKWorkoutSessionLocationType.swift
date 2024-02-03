@@ -22,3 +22,14 @@ extension HKWorkoutSessionLocationType: CaseIterable {
         }
     }
 }
+
+extension HKWorkoutSessionLocationType {
+    var displayImage: String {
+        switch self {
+        case .indoor: return "house"
+        case .outdoor: return "sun.horizon"
+        case .unknown: return "questionmark.circle"
+        @unknown default: return "questionmark.circle"
+        }
+    }
+}
