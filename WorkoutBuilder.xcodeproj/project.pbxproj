@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7801D3AE2B6C92CA006E81FE /* ActivitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3AD2B6C92CA006E81FE /* ActivitySelection.swift */; };
+		7801D3B32B6C9871006E81FE /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7801D3B22B6C9871006E81FE /* Algorithms */; };
+		7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3B42B6C9C41006E81FE /* StringExtension.swift */; };
 		78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */; };
 		78A9658A2A94491000A606A4 /* WorkoutAlertSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965892A94491000A606A4 /* WorkoutAlertSection.swift */; };
 		78A9658C2A946CB700A606A4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A9658B2A946CB700A606A4 /* Functions.swift */; };
@@ -25,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7801D3AD2B6C92CA006E81FE /* ActivitySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySelection.swift; sourceTree = "<group>"; };
+		7801D3B42B6C9C41006E81FE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGoalSection.swift; sourceTree = "<group>"; };
 		78A965892A94491000A606A4 /* WorkoutAlertSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertSection.swift; sourceTree = "<group>"; };
 		78A9658B2A946CB700A606A4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -48,12 +53,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7801D3B32B6C9871006E81FE /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7801D3AC2B6C9252006E81FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7801D3AD2B6C92CA006E81FE /* ActivitySelection.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		78A965852A9441B500A606A4 /* WorkoutGoalSection */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +105,7 @@
 			children = (
 				78FDA3722A42983600A0EDF3 /* WorkoutBuilderApp.swift */,
 				78FDA3742A42983600A0EDF3 /* ContentView.swift */,
+				7801D3AC2B6C9252006E81FE /* Views */,
 				78FDA38C2A435F0200A0EDF3 /* IntervalBlock */,
 				78FDA3912A43C35800A0EDF3 /* BlockStep */,
 				78FDA3892A43583700A0EDF3 /* WorkoutStep */,
@@ -144,6 +159,7 @@
 				78FDA3982A43CC8100A0EDF3 /* WorkoutGoalExtension.swift */,
 				78B1E57F2A46B30C00F17999 /* HKWorkoutActivityType.swift */,
 				78B1E5812A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift */,
+				7801D3B42B6C9C41006E81FE /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -172,6 +188,9 @@
 			dependencies = (
 			);
 			name = WorkoutBuilder;
+			packageProductDependencies = (
+				7801D3B22B6C9871006E81FE /* Algorithms */,
+			);
 			productName = WorkoutBuilder;
 			productReference = 78FDA36F2A42983600A0EDF3 /* WorkoutBuilder.app */;
 			productType = "com.apple.product-type.application";
@@ -200,6 +219,9 @@
 				Base,
 			);
 			mainGroup = 78FDA3662A42983600A0EDF3;
+			packageReferences = (
+				7801D3B12B6C9871006E81FE /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			productRefGroup = 78FDA3702A42983600A0EDF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -228,7 +250,9 @@
 			files = (
 				78FDA3902A43BDE200A0EDF3 /* IntervalBlockExtensions.swift in Sources */,
 				78FDA3872A43580700A0EDF3 /* WorkoutStepView.swift in Sources */,
+				7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */,
 				78A9658C2A946CB700A606A4 /* Functions.swift in Sources */,
+				7801D3AE2B6C92CA006E81FE /* ActivitySelection.swift in Sources */,
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */,
 				78FDA38E2A435F1500A0EDF3 /* IntervalBlockView.swift in Sources */,
@@ -444,6 +468,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7801D3B12B6C9871006E81FE /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7801D3B22B6C9871006E81FE /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7801D3B12B6C9871006E81FE /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 78FDA3672A42983600A0EDF3 /* Project object */;
 }

@@ -8,6 +8,7 @@
 import Foundation
 import HealthKit
 import WorkoutKit
+import Algorithms
 
 extension HKWorkoutActivityType: CaseIterable {
     public static var allCases: [HKWorkoutActivityType] {
@@ -101,6 +102,8 @@ extension HKWorkoutActivityType: CaseIterable {
             CustomWorkout.supportsActivity(type)
         }
     }
+
+    public static var chunks = supportedCases.chunks(ofCount: 2)
 
     var displayName: String {
         switch self {
@@ -273,5 +276,11 @@ extension HKWorkoutActivityType: CaseIterable {
         @unknown default:
             return "Other"
         }
+    }
+}
+
+extension HKWorkoutActivityType {
+    var displayImage: String {
+        return "figure\(self.displayName.dotCase())"
     }
 }
