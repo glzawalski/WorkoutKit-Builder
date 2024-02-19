@@ -11,7 +11,8 @@ import HealthKit
 typealias LocationType = HKWorkoutSessionLocationType
 
 struct LocationSelection: View {
-    @State private var type: LocationType = .unknown
+    @EnvironmentObject var model: CustomWorkoutModel
+    @EnvironmentObject var router: Router
 
     var body: some View {
         VStack {
@@ -24,7 +25,8 @@ struct LocationSelection: View {
 
             Button(
                 action: {
-
+                    model.locationType = .unknown
+                    router.navigate(to: .warmup)
                 },
                 label: {
                     Label(
@@ -34,10 +36,14 @@ struct LocationSelection: View {
                 }
             )
         }
+        .navigationTitle("Location selection")
     }
 }
 
 struct LocationTypeItem: View {
+    @EnvironmentObject var model: CustomWorkoutModel
+    @EnvironmentObject var router: Router
+
     let type: LocationType
 
     var body: some View {
@@ -51,11 +57,17 @@ struct LocationTypeItem: View {
         .padding()
         .overlay(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .strokeBorder(.black, lineWidth: 5)
+                .strokeBorder(model.locationType == type ? .blue : .black, lineWidth: 5)
         )
+        .onTapGesture {
+            model.locationType = type
+            router.navigate(to: .warmup)
+        }
     }
 }
 
 #Preview {
     LocationSelection()
+        .environmentObject(CustomWorkoutModel())
+        .environmentObject(Router())
 }

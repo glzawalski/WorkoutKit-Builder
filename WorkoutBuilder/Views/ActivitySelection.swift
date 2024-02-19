@@ -11,7 +11,8 @@ import HealthKit
 typealias ActivityType = HKWorkoutActivityType
 
 struct ActivitySelection: View {
-    @State private var type: ActivityType = .other
+    @EnvironmentObject var model: CustomWorkoutModel
+    @EnvironmentObject var router: Router
 
     var body: some View {
         ScrollView {
@@ -24,11 +25,27 @@ struct ActivitySelection: View {
                     }
                 }
             }
+            Button(
+                action: {
+                    model.activityType = .other
+                    router.navigate(to: .locationSelection)
+                },
+                label: {
+                    Label(
+                        ActivityType.other.displayName,
+                        systemImage: ActivityType.other.displayImage
+                    )
+                }
+            )
         }
+        .navigationTitle("Activity selection")
     }
 }
 
 struct ActivityTypeItem: View {
+    @EnvironmentObject var model: CustomWorkoutModel
+    @EnvironmentObject var router: Router
+
     let type: ActivityType
 
     var body: some View {
@@ -42,11 +59,16 @@ struct ActivityTypeItem: View {
         .padding()
         .overlay(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .strokeBorder(.black, lineWidth: 5)
+                .strokeBorder(model.activityType == type ? .blue : .black, lineWidth: 5)
         )
+        .onTapGesture {
+            model.activityType = type
+            router.navigate(to: .locationSelection)
+        }
     }
 }
 
 #Preview {
     ActivitySelection()
+        .environmentObject(CustomWorkoutModel())
 }
