@@ -13,13 +13,17 @@
 		7801D3B72B6DE547006E81FE /* LocationSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3B62B6DE547006E81FE /* LocationSelection.swift */; };
 		7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3BF2B6F1D5F006E81FE /* GoalType.swift */; };
 		7801D3C22B6F1D88006E81FE /* GoalUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3C12B6F1D88006E81FE /* GoalUnit.swift */; };
+		7801D3DA2B71AD14006E81FE /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3D92B71AD14006E81FE /* AlertView.swift */; };
 		7801D3DC2B71AD70006E81FE /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3DB2B71AD70006E81FE /* AlertType.swift */; };
 		7801D3DE2B71B8A0006E81FE /* CustomWorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3DD2B71B8A0006E81FE /* CustomWorkoutModel.swift */; };
 		7801D3E42B71C9FB006E81FE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3E32B71C9FB006E81FE /* Router.swift */; };
 		7801D3E62B7EAFE0006E81FE /* DimensionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3E52B7EAFE0006E81FE /* DimensionExtensions.swift */; };
 		7801D3E82B7EAFFE006E81FE /* WorkoutAlertExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3E72B7EAFFE006E81FE /* WorkoutAlertExtensions.swift */; };
+		7801D3EB2B7EE7FD006E81FE /* RangeAlertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3EA2B7EE7FD006E81FE /* RangeAlertSheet.swift */; };
 		7801D3ED2B7EEAB4006E81FE /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3EC2B7EEAB4006E81FE /* UnitExtensions.swift */; };
 		7801D3EF2B7EF1B1006E81FE /* NumberFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3EE2B7EF1B1006E81FE /* NumberFormatterExtension.swift */; };
+		782F77902B7F9EFF002CDF2A /* ZoneAlertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782F778F2B7F9EFF002CDF2A /* ZoneAlertSheet.swift */; };
+		782F77922B7FA208002CDF2A /* ThresholdAlertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782F77912B7FA208002CDF2A /* ThresholdAlertSheet.swift */; };
 		782F77962B805C5F002CDF2A /* CustomWorkoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782F77952B805C5F002CDF2A /* CustomWorkoutExtension.swift */; };
 		78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */; };
 		78A9658A2A94491000A606A4 /* WorkoutAlertSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965892A94491000A606A4 /* WorkoutAlertSection.swift */; };
@@ -44,13 +48,17 @@
 		7801D3B62B6DE547006E81FE /* LocationSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelection.swift; sourceTree = "<group>"; };
 		7801D3BF2B6F1D5F006E81FE /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
 		7801D3C12B6F1D88006E81FE /* GoalUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUnit.swift; sourceTree = "<group>"; };
+		7801D3D92B71AD14006E81FE /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		7801D3DB2B71AD70006E81FE /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		7801D3DD2B71B8A0006E81FE /* CustomWorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWorkoutModel.swift; sourceTree = "<group>"; };
 		7801D3E32B71C9FB006E81FE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7801D3E52B7EAFE0006E81FE /* DimensionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionExtensions.swift; sourceTree = "<group>"; };
 		7801D3E72B7EAFFE006E81FE /* WorkoutAlertExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertExtensions.swift; sourceTree = "<group>"; };
+		7801D3EA2B7EE7FD006E81FE /* RangeAlertSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeAlertSheet.swift; sourceTree = "<group>"; };
 		7801D3EC2B7EEAB4006E81FE /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		7801D3EE2B7EF1B1006E81FE /* NumberFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterExtension.swift; sourceTree = "<group>"; };
+		782F778F2B7F9EFF002CDF2A /* ZoneAlertSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneAlertSheet.swift; sourceTree = "<group>"; };
+		782F77912B7FA208002CDF2A /* ThresholdAlertSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdAlertSheet.swift; sourceTree = "<group>"; };
 		782F77952B805C5F002CDF2A /* CustomWorkoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWorkoutExtension.swift; sourceTree = "<group>"; };
 		78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGoalSection.swift; sourceTree = "<group>"; };
 		78A965892A94491000A606A4 /* WorkoutAlertSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertSection.swift; sourceTree = "<group>"; };
@@ -85,6 +93,7 @@
 		7801D3AC2B6C9252006E81FE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7801D3E92B7EE7E4006E81FE /* Alert */,
 				7801D3AD2B6C92CA006E81FE /* ActivitySelection.swift */,
 				7801D3B62B6DE547006E81FE /* LocationSelection.swift */,
 			);
@@ -101,6 +110,25 @@
 				7801D3E32B71C9FB006E81FE /* Router.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7801D3E92B7EE7E4006E81FE /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7801D3F02B7EFFB9006E81FE /* Sheets */,
+				7801D3D92B71AD14006E81FE /* AlertView.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		7801D3F02B7EFFB9006E81FE /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				7801D3EA2B7EE7FD006E81FE /* RangeAlertSheet.swift */,
+				782F778F2B7F9EFF002CDF2A /* ZoneAlertSheet.swift */,
+				782F77912B7FA208002CDF2A /* ThresholdAlertSheet.swift */,
+			);
+			path = Sheets;
 			sourceTree = "<group>";
 		};
 		78A965852A9441B500A606A4 /* WorkoutGoalSection */ = {
@@ -295,6 +323,7 @@
 				7801D3E82B7EAFFE006E81FE /* WorkoutAlertExtensions.swift in Sources */,
 				7801D3C22B6F1D88006E81FE /* GoalUnit.swift in Sources */,
 				7801D3E42B71C9FB006E81FE /* Router.swift in Sources */,
+				7801D3DA2B71AD14006E81FE /* AlertView.swift in Sources */,
 				7801D3DE2B71B8A0006E81FE /* CustomWorkoutModel.swift in Sources */,
 				78FDA3872A43580700A0EDF3 /* WorkoutStepView.swift in Sources */,
 				7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */,
@@ -303,6 +332,7 @@
 				7801D3E62B7EAFE0006E81FE /* DimensionExtensions.swift in Sources */,
 				7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */,
 				7801D3AE2B6C92CA006E81FE /* ActivitySelection.swift in Sources */,
+				7801D3EB2B7EE7FD006E81FE /* RangeAlertSheet.swift in Sources */,
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				782F77962B805C5F002CDF2A /* CustomWorkoutExtension.swift in Sources */,
 				78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */,
@@ -312,8 +342,10 @@
 				78FDA3992A43CC8100A0EDF3 /* WorkoutGoalExtension.swift in Sources */,
 				78FDA3972A43CB9000A0EDF3 /* IntervalStepExtension.swift in Sources */,
 				78FDA3932A43C36800A0EDF3 /* BlockStepView.swift in Sources */,
+				782F77902B7F9EFF002CDF2A /* ZoneAlertSheet.swift in Sources */,
 				78FDA3732A42983600A0EDF3 /* WorkoutBuilderApp.swift in Sources */,
 				78B1E5822A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift in Sources */,
+				782F77922B7FA208002CDF2A /* ThresholdAlertSheet.swift in Sources */,
 				78A9658A2A94491000A606A4 /* WorkoutAlertSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
