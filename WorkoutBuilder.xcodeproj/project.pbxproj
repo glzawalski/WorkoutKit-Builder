@@ -11,6 +11,8 @@
 		7801D3B32B6C9871006E81FE /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7801D3B22B6C9871006E81FE /* Algorithms */; };
 		7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3B42B6C9C41006E81FE /* StringExtension.swift */; };
 		7801D3B72B6DE547006E81FE /* LocationSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3B62B6DE547006E81FE /* LocationSelection.swift */; };
+		7801D3B92B6DEA50006E81FE /* WarmupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3B82B6DEA50006E81FE /* WarmupView.swift */; };
+		7801D3BB2B6EF774006E81FE /* CooldownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3BA2B6EF774006E81FE /* CooldownView.swift */; };
 		7801D3BD2B6F186A006E81FE /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3BC2B6F186A006E81FE /* GoalView.swift */; };
 		7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3BF2B6F1D5F006E81FE /* GoalType.swift */; };
 		7801D3C22B6F1D88006E81FE /* GoalUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3C12B6F1D88006E81FE /* GoalUnit.swift */; };
@@ -50,6 +52,8 @@
 		7801D3AD2B6C92CA006E81FE /* ActivitySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySelection.swift; sourceTree = "<group>"; };
 		7801D3B42B6C9C41006E81FE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		7801D3B62B6DE547006E81FE /* LocationSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelection.swift; sourceTree = "<group>"; };
+		7801D3B82B6DEA50006E81FE /* WarmupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarmupView.swift; sourceTree = "<group>"; };
+		7801D3BA2B6EF774006E81FE /* CooldownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooldownView.swift; sourceTree = "<group>"; };
 		7801D3BC2B6F186A006E81FE /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		7801D3BF2B6F1D5F006E81FE /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
 		7801D3C12B6F1D88006E81FE /* GoalUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUnit.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 				7801D3E92B7EE7E4006E81FE /* Alert */,
 				7801D3AD2B6C92CA006E81FE /* ActivitySelection.swift */,
 				7801D3B62B6DE547006E81FE /* LocationSelection.swift */,
+				7801D3B82B6DEA50006E81FE /* WarmupView.swift */,
+				7801D3BA2B6EF774006E81FE /* CooldownView.swift */,
 				7801D3BC2B6F186A006E81FE /* GoalView.swift */,
 			);
 			path = Views;
@@ -346,6 +352,7 @@
 				7801D3DA2B71AD14006E81FE /* AlertView.swift in Sources */,
 				7801D3DE2B71B8A0006E81FE /* CustomWorkoutModel.swift in Sources */,
 				78FDA3872A43580700A0EDF3 /* WorkoutStepView.swift in Sources */,
+				7801D3BB2B6EF774006E81FE /* CooldownView.swift in Sources */,
 				7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */,
 				7801D3EF2B7EF1B1006E81FE /* NumberFormatterExtension.swift in Sources */,
 				78A9658C2A946CB700A606A4 /* Functions.swift in Sources */,
@@ -358,6 +365,7 @@
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				782F77962B805C5F002CDF2A /* CustomWorkoutExtension.swift in Sources */,
 				7801D3BD2B6F186A006E81FE /* GoalView.swift in Sources */,
+				7801D3B92B6DEA50006E81FE /* WarmupView.swift in Sources */,
 				78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */,
 				78FDA38E2A435F1500A0EDF3 /* OldIntervalBlockView.swift in Sources */,
 				7801D3DC2B71AD70006E81FE /* AlertType.swift in Sources */,
