@@ -1,5 +1,5 @@
 //
-//  IntervalBlockView.swift
+//  OldIntervalBlockView.swift
 //  WorkoutBuilder
 //
 //  Created by Gabriel Zawalski on 21/06/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import WorkoutKit
 import HealthKit
 
-struct IntervalBlockView: View {
+struct OldIntervalBlockView: View {
     @Environment(\.dismiss) private var dismiss
 
     @Binding var intervalBlocks: [IntervalBlock]
@@ -142,14 +142,14 @@ struct IntervalBlockView: View {
     }
 }
 
-private extension IntervalBlockView {
+private extension OldIntervalBlockView {
     func createIntervalBlock() -> IntervalBlock? {
         return IntervalBlock(steps: steps, iterations: iterations)
     }
 }
 
 #Preview {
-    IntervalBlockView(
+    OldIntervalBlockView(
         intervalBlocks: .constant(
             [
                 IntervalBlock(
