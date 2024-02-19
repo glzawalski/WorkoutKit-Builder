@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import HealthKit
 
 @main
 struct WorkoutBuilderApp: App {
     var body: some Scene {
         WindowGroup {
-            ActivitySelection()
+            PrimaryView()
+                .environmentObject(CustomWorkoutModel())
+                .environmentObject(Router())
         }
     }
 }
