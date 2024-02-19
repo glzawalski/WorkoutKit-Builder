@@ -70,7 +70,7 @@ struct ContentView: View {
             )
         }
         .sheet(isPresented: $addIntervalBlock) {
-            IntervalBlockView(
+            OldIntervalBlockView(
                 intervalBlocks: $intervalBlocks,
                 selectedBlock: .constant(nil),
                 addingNew: true,
@@ -79,7 +79,7 @@ struct ContentView: View {
             )
         }
         .sheet(isPresented: $editIntervalBlock) {
-            IntervalBlockView(
+            OldIntervalBlockView(
                 intervalBlocks: $intervalBlocks,
                 selectedBlock: $selectedBlock,
                 addingNew: false,
