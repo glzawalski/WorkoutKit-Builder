@@ -10,7 +10,7 @@ import HealthKit
 
 extension HKWorkoutSessionLocationType: CaseIterable {
     public static var allCases: [HKWorkoutSessionLocationType] {
-        return [.unknown, .indoor, .outdoor]
+        return [.indoor, .outdoor]
     }
 
     var displayName: String {
