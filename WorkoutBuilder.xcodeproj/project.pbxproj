@@ -32,6 +32,10 @@
 		782F77962B805C5F002CDF2A /* CustomWorkoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782F77952B805C5F002CDF2A /* CustomWorkoutExtension.swift */; };
 		782F77982B819817002CDF2A /* IntervalBlockStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782F77972B819817002CDF2A /* IntervalBlockStepView.swift */; };
 		782F779B2B81995F002CDF2A /* IntervalBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782F779A2B81995F002CDF2A /* IntervalBlockView.swift */; };
+		78943A952D037BD500F14C75 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A942D037BC600F14C75 /* WorkoutList.swift */; };
+		78943A982D03850900F14C75 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A972D03850100F14C75 /* Workout.swift */; };
+		78943A9A2D0385FA00F14C75 /* AddWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A992D0385F100F14C75 /* AddWorkoutView.swift */; };
+		78943A9C2D039F5100F14C75 /* GoalAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A9B2D039F4D00F14C75 /* GoalAlertView.swift */; };
 		78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */; };
 		78A9658A2A94491000A606A4 /* WorkoutAlertSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965892A94491000A606A4 /* WorkoutAlertSection.swift */; };
 		78A9658C2A946CB700A606A4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A9658B2A946CB700A606A4 /* Functions.swift */; };
@@ -74,6 +78,10 @@
 		782F77952B805C5F002CDF2A /* CustomWorkoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWorkoutExtension.swift; sourceTree = "<group>"; };
 		782F77972B819817002CDF2A /* IntervalBlockStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalBlockStepView.swift; sourceTree = "<group>"; };
 		782F779A2B81995F002CDF2A /* IntervalBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalBlockView.swift; sourceTree = "<group>"; };
+		78943A942D037BC600F14C75 /* WorkoutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
+		78943A972D03850100F14C75 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		78943A992D0385F100F14C75 /* AddWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutView.swift; sourceTree = "<group>"; };
+		78943A9B2D039F4D00F14C75 /* GoalAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAlertView.swift; sourceTree = "<group>"; };
 		78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGoalSection.swift; sourceTree = "<group>"; };
 		78A965892A94491000A606A4 /* WorkoutAlertSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertSection.swift; sourceTree = "<group>"; };
 		78A9658B2A946CB700A606A4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -159,6 +167,25 @@
 			path = IntervalBlocks;
 			sourceTree = "<group>";
 		};
+		78943A932D037BB400F14C75 /* NewApp */ = {
+			isa = PBXGroup;
+			children = (
+				78943A9B2D039F4D00F14C75 /* GoalAlertView.swift */,
+				78943A992D0385F100F14C75 /* AddWorkoutView.swift */,
+				78943A962D0384F300F14C75 /* Model */,
+				78943A942D037BC600F14C75 /* WorkoutList.swift */,
+			);
+			path = NewApp;
+			sourceTree = "<group>";
+		};
+		78943A962D0384F300F14C75 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				78943A972D03850100F14C75 /* Workout.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		78A965852A9441B500A606A4 /* WorkoutGoalSection */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +221,7 @@
 		78FDA3712A42983600A0EDF3 /* WorkoutBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				78943A932D037BB400F14C75 /* NewApp */,
 				7801D3BE2B6F1D55006E81FE /* Models */,
 				78FDA3722A42983600A0EDF3 /* WorkoutBuilderApp.swift */,
 				78FDA3742A42983600A0EDF3 /* ContentView.swift */,
@@ -351,6 +379,7 @@
 				7801D3B72B6DE547006E81FE /* LocationSelection.swift in Sources */,
 				7801D3E82B7EAFFE006E81FE /* WorkoutAlertExtensions.swift in Sources */,
 				7801D3C22B6F1D88006E81FE /* GoalUnit.swift in Sources */,
+				78943A952D037BD500F14C75 /* WorkoutList.swift in Sources */,
 				7801D3E42B71C9FB006E81FE /* Router.swift in Sources */,
 				7801D3DA2B71AD14006E81FE /* AlertView.swift in Sources */,
 				7801D3DE2B71B8A0006E81FE /* CustomWorkoutModel.swift in Sources */,
@@ -360,12 +389,14 @@
 				7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */,
 				7801D3EF2B7EF1B1006E81FE /* NumberFormatterExtension.swift in Sources */,
 				78A9658C2A946CB700A606A4 /* Functions.swift in Sources */,
+				78943A9A2D0385FA00F14C75 /* AddWorkoutView.swift in Sources */,
 				7801D3E62B7EAFE0006E81FE /* DimensionExtensions.swift in Sources */,
 				7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */,
 				7801D3AE2B6C92CA006E81FE /* ActivitySelection.swift in Sources */,
 				782F77982B819817002CDF2A /* IntervalBlockStepView.swift in Sources */,
 				782F77942B805BB7002CDF2A /* IntervalBlocksView.swift in Sources */,
 				7801D3EB2B7EE7FD006E81FE /* RangeAlertSheet.swift in Sources */,
+				78943A9C2D039F5100F14C75 /* GoalAlertView.swift in Sources */,
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				782F77962B805C5F002CDF2A /* CustomWorkoutExtension.swift in Sources */,
 				7801D3BD2B6F186A006E81FE /* GoalView.swift in Sources */,
@@ -374,6 +405,7 @@
 				78FDA38E2A435F1500A0EDF3 /* OldIntervalBlockView.swift in Sources */,
 				7801D3DC2B71AD70006E81FE /* AlertType.swift in Sources */,
 				78B1E5802A46B30C00F17999 /* HKWorkoutActivityType.swift in Sources */,
+				78943A982D03850900F14C75 /* Workout.swift in Sources */,
 				782F779B2B81995F002CDF2A /* IntervalBlockView.swift in Sources */,
 				78FDA3992A43CC8100A0EDF3 /* WorkoutGoalExtension.swift in Sources */,
 				78FDA3972A43CB9000A0EDF3 /* IntervalStepExtension.swift in Sources */,

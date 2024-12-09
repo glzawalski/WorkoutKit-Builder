@@ -12,9 +12,9 @@ import HealthKit
 struct WorkoutBuilderApp: App {
     var body: some Scene {
         WindowGroup {
-            PrimaryView()
-                .environmentObject(CustomWorkoutModel())
-                .environmentObject(Router())
+            WorkoutList()
+//                .environmentObject(CustomWorkoutModel())
+//                .environmentObject(Router())
         }
     }
 }

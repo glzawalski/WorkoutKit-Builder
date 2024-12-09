@@ -47,8 +47,6 @@ struct WorkoutStepView: View {
             switch unitLength {
             case .kilometers: _goalUnit = .init(initialValue: .kilometers)
             case .meters: _goalUnit = .init(initialValue: .meters)
-            case .centimeters: _goalUnit = .init(initialValue: .centimeters)
-            case .feet: _goalUnit = .init(initialValue: .feet)
             case .yards: _goalUnit = .init(initialValue: .yards)
             case .miles: _goalUnit = .init(initialValue: .miles)
             default: _goalUnit = .init(initialValue: nil)
@@ -72,11 +70,8 @@ struct WorkoutStepView: View {
             _goalType = .init(initialValue: .energy)
 
             switch unitEnergy {
-            case .kilojoules: _goalUnit = .init(initialValue: .kilojoules)
-            case .joules: _goalUnit = .init(initialValue: .joules)
             case .kilocalories: _goalUnit = .init(initialValue: .kilocalories)
             case .calories: _goalUnit = .init(initialValue: .calories)
-            case .kilowattHours: _goalUnit = .init(initialValue: .kilowattHours)
             default: _goalUnit = .init(initialValue: nil)
             }
 

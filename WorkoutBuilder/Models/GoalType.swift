@@ -38,4 +38,17 @@ enum GoalType: String, CaseIterable {
     }
 
     public static var chunks = supportedCases.chunks(ofCount: 2)
+
+    public var defaultUnit: GoalUnit? {
+        switch self {
+        case .distance:
+            return .meters
+        case .energy:
+            return .calories
+        case .time:
+            return .seconds
+        case .open:
+            return nil
+        }
+    }
 }

@@ -34,17 +34,12 @@ func createWorkoutStep(
     var goal: WorkoutGoal
 
     switch goalUnit {
-    case .centimeters: lenght = .centimeters
-    case .feet: lenght = .feet
     case .kilometers: lenght = .kilometers
     case .meters: lenght = .meters
     case .miles: lenght = .miles
     case .yards: lenght = .yards
     case .calories: energy = .calories
-    case .joules: energy = .joules
     case .kilocalories: energy = .kilocalories
-    case .kilojoules: energy = .kilojoules
-    case .kilowattHours: energy = .kilowattHours
     case .hours: duration = .hours
     case .minutes: duration = .minutes
     case .seconds: duration = .seconds
