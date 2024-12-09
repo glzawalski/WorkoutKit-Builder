@@ -284,3 +284,15 @@ extension HKWorkoutActivityType {
         return "figure\(self.displayName.dotCase())"
     }
 }
+
+// MARK: - Supported alerts
+extension HKWorkoutActivityType {
+    func supportedAlerts(location: HKWorkoutSessionLocationType = .indoor) -> [WorkoutAlertEnum] {
+        WorkoutAlertEnum.allCases.map { alertEnum in
+            guard alertEnum.alert.supports(activity: self, location: location) else {
+                return nil
+            }
+            return alertEnum
+        }.compactMap { $0 }
+    }
+}

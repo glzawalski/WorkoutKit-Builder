@@ -20,7 +20,7 @@ extension WorkoutGoal: CaseIterable, Identifiable {
         case .distance: return "Distance"
         case .time: return "Time"
         case .energy: return "Energy"
-        case .open: return "No goal"
+        case .open: return "Open goal"
         @unknown default: return "No goal"
         }
     }

@@ -36,6 +36,7 @@
 		78943A982D03850900F14C75 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A972D03850100F14C75 /* Workout.swift */; };
 		78943A9A2D0385FA00F14C75 /* AddWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A992D0385F100F14C75 /* AddWorkoutView.swift */; };
 		78943A9C2D039F5100F14C75 /* GoalAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A9B2D039F4D00F14C75 /* GoalAlertView.swift */; };
+		78943A9E2D07598100F14C75 /* AddWorkoutStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A9D2D07597B00F14C75 /* AddWorkoutStepView.swift */; };
 		78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */; };
 		78A9658A2A94491000A606A4 /* WorkoutAlertSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A965892A94491000A606A4 /* WorkoutAlertSection.swift */; };
 		78A9658C2A946CB700A606A4 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A9658B2A946CB700A606A4 /* Functions.swift */; };
@@ -82,6 +83,7 @@
 		78943A972D03850100F14C75 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		78943A992D0385F100F14C75 /* AddWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutView.swift; sourceTree = "<group>"; };
 		78943A9B2D039F4D00F14C75 /* GoalAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAlertView.swift; sourceTree = "<group>"; };
+		78943A9D2D07597B00F14C75 /* AddWorkoutStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutStepView.swift; sourceTree = "<group>"; };
 		78A965862A9441D500A606A4 /* WorkoutGoalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGoalSection.swift; sourceTree = "<group>"; };
 		78A965892A94491000A606A4 /* WorkoutAlertSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertSection.swift; sourceTree = "<group>"; };
 		78A9658B2A946CB700A606A4 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		78943A932D037BB400F14C75 /* NewApp */ = {
 			isa = PBXGroup;
 			children = (
+				78943A9D2D07597B00F14C75 /* AddWorkoutStepView.swift */,
 				78943A9B2D039F4D00F14C75 /* GoalAlertView.swift */,
 				78943A992D0385F100F14C75 /* AddWorkoutView.swift */,
 				78943A962D0384F300F14C75 /* Model */,
@@ -400,6 +403,7 @@
 				78FDA3752A42983600A0EDF3 /* ContentView.swift in Sources */,
 				782F77962B805C5F002CDF2A /* CustomWorkoutExtension.swift in Sources */,
 				7801D3BD2B6F186A006E81FE /* GoalView.swift in Sources */,
+				78943A9E2D07598100F14C75 /* AddWorkoutStepView.swift in Sources */,
 				7801D3B92B6DEA50006E81FE /* WarmupView.swift in Sources */,
 				78A965872A9441D500A606A4 /* WorkoutGoalSection.swift in Sources */,
 				78FDA38E2A435F1500A0EDF3 /* OldIntervalBlockView.swift in Sources */,

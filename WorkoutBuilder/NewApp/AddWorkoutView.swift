@@ -15,49 +15,63 @@ struct AddWorkoutView: View {
     @Binding var workouts: [Workout]
 
     @State private var name: String = "My Workout"
+
     @State private var selectedType: HKWorkoutActivityType?
+
     @State private var selectedLocation: HKWorkoutSessionLocationType = .indoor
+
     @State private var selectedLocationToggle: Bool = false
-    @State private var warmup: WorkoutStep?
+
+    @State private var hasWarmup: Bool = false
+    @State private var warmupGoal: WorkoutGoal = .open
+    @State private var warmupAlert: (any WorkoutAlert)?
+    @State private var didTapWarmup: Bool = false
+
     @State private var intervalBlocks: [IntervalBlock] = []
-    @State private var cooldown: WorkoutStep?
+
+    @State private var hasCooldown: Bool = false
+    @State private var cooldownGoal: WorkoutGoal = .open
+    @State private var cooldownAlert: (any WorkoutAlert)?
+    @State private var didTapCooldown: Bool = false
 
     var body: some View {
-        VStack() {
-            Group {
-                workoutName
+        NavigationStack {
+            VStack() {
+                Group {
+                    workoutName
 
-                Spacer().frame(height: 30)
+                    Spacer().frame(height: 30)
 
-                workoutLocation
+                    workoutLocation
 
-                Spacer().frame(height: 100)
+                    Spacer().frame(height: 100)
 
-                TabView {
-                    warmupSummary
+                    TabView {
+                        warmupSummary
 
-                    intervalBlocksSummary
+                        intervalBlocksSummary
 
-                    cooldownSummary
+                        cooldownSummary
+                    }
+                    .tabViewStyle(.page)
+                    .indexViewStyle(.page(backgroundDisplayMode: .always))
+                    .padding(.bottom)
+
+                    Spacer()
                 }
-                .tabViewStyle(.page)
-                .indexViewStyle(.page(backgroundDisplayMode: .always))
-                .padding(.bottom)
-
-                Spacer()
-            }
-            .opacity(selectedType != nil ? 1 : 0)
-            .animation(.bouncy.delay(0.5), value: selectedType != nil)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background {
-            workoutType
                 .opacity(selectedType != nil ? 1 : 0)
-                .animation(.bouncy.delay(0.2), value: selectedType != nil)
+                .animation(.bouncy.delay(0.5), value: selectedType != nil)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background {
+                workoutType
+                    .opacity(selectedType != nil ? 1 : 0)
+                    .animation(.bouncy.delay(0.2), value: selectedType != nil)
 
-            workoutTypePicker
-                .opacity(selectedType == nil ? 1 : 0)
-                .animation(.default, value: selectedType == nil)
+                workoutTypePicker
+                    .opacity(selectedType == nil ? 1 : 0)
+                    .animation(.default, value: selectedType == nil)
+            }
         }
     }
 
@@ -123,25 +137,31 @@ struct AddWorkoutView: View {
         CenteredScrollView {
             ZStack {
                 Button("Add warmup") {
-                    // TODO: Add workout step flow
-                    warmup = .init(
-                        goal: .distance(1, .kilometers),
-                        alert: SpeedThresholdAlert(
-                            target: .init(value: 1, unit: .kilometersPerHour),
-                            metric: .average
-                        )
-                    )
+                    hasWarmup.toggle()
                 }
-                .opacity(warmup == nil ? 1 : 0)
-                .frame(maxHeight: warmup == nil ? nil : 0)
+                .opacity(hasWarmup ? 0 : 1)
+                .frame(maxHeight: hasWarmup ? 0 : nil)
 
                 VStack {
                     Text("Warmup")
-                    Text(warmup?.goal.description ?? "Placeholder")
-                    Text(warmup?.alert?.description ?? "Placeholder")
+                    Text(warmupGoal.description)
+                    Text(warmupAlert?.description ?? "No alert set")
                 }
-                .opacity(warmup == nil ? 0 : 1)
-                .frame(maxHeight: warmup == nil ? 0 : nil)
+                .opacity(hasWarmup ? 1 : 0)
+                .frame(maxHeight: hasWarmup ? nil : 0)
+                .onTapGesture {
+                    didTapWarmup.toggle()
+                }
+            }
+            .navigationDestination(isPresented: $didTapWarmup) {
+                if let selectedType {
+                    AddWorkoutStepView(
+                        activity: selectedType,
+                        location: selectedLocation,
+                        goal: $warmupGoal,
+                        alert: $warmupAlert
+                    )
+                }
             }
         }
     }
@@ -292,25 +312,31 @@ struct AddWorkoutView: View {
         CenteredScrollView {
             ZStack {
                 Button("Add cooldown") {
-                    // TODO: Add workout step flow
-                    cooldown = .init(
-                        goal: .distance(1, .kilometers),
-                        alert: SpeedThresholdAlert(
-                            target: .init(value: 1, unit: .kilometersPerHour),
-                            metric: .average
-                        )
-                    )
+                    hasCooldown.toggle()
                 }
-                .opacity(cooldown == nil ? 1 : 0)
-                .frame(maxHeight: cooldown == nil ? nil : 0)
+                .opacity(hasCooldown ? 0 : 1)
+                .frame(maxHeight: hasCooldown ? 0 : nil)
 
                 VStack {
                     Text("Cooldown")
-                    Text(cooldown?.goal.description ?? "Placeholder")
-                    Text(cooldown?.alert?.description ?? "Placeholder")
+                    Text(cooldownGoal.description)
+                    Text(cooldownAlert?.description ?? "No alert set")
                 }
-                .opacity(cooldown == nil ? 0 : 1)
-                .frame(maxHeight: cooldown == nil ? 0 : nil)
+                .opacity(hasCooldown ? 1 : 0)
+                .frame(maxHeight: hasCooldown ? nil : 0)
+                .onTapGesture {
+                    didTapCooldown.toggle()
+                }
+            }
+            .navigationDestination(isPresented: $didTapCooldown) {
+                if let selectedType {
+                    AddWorkoutStepView(
+                        activity: selectedType,
+                        location: selectedLocation,
+                        goal: $cooldownGoal,
+                        alert: $cooldownAlert
+                    )
+                }
             }
         }
     }
