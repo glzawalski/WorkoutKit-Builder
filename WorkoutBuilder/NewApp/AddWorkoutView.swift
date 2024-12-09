@@ -16,74 +16,11 @@ struct AddWorkoutView: View {
 
     @State private var name: String = "My Workout"
     @State private var selectedType: HKWorkoutActivityType?
-    @State private var selectedLocation: HKWorkoutSessionLocationType = .outdoor
+    @State private var selectedLocation: HKWorkoutSessionLocationType = .indoor
     @State private var selectedLocationToggle: Bool = false
-    @State private var warmup: WorkoutStep = .init(
-        goal: .distance(1, .kilometers),
-        alert: SpeedThresholdAlert(
-            target: .init(value: 1, unit: .kilometersPerHour),
-            metric: .average
-        )
-    )
-    @State private var intervalBlocks: [IntervalBlock] = [
-        .init(
-            steps: [
-                IntervalStep(
-                    .work,
-                    goal: .distance(1, .kilometers),
-                    alert: SpeedThresholdAlert(
-                        target: .init(value: 1, unit: .kilometersPerHour),
-                        metric: .average
-                    )
-                ),
-                IntervalStep(
-                    .work,
-                    goal: .distance(1, .kilometers),
-                    alert: SpeedThresholdAlert(
-                        target: .init(value: 1, unit: .kilometersPerHour),
-                        metric: .average
-                    )
-                )
-            ],
-            iterations: 1
-        ),
-        .init(
-            steps: [
-                IntervalStep(
-                    .recovery,
-                    goal: .distance(1, .kilometers),
-                    alert: SpeedThresholdAlert(
-                        target: .init(value: 1, unit: .kilometersPerHour),
-                        metric: .average
-                    )
-                ),
-                IntervalStep(
-                    .work,
-                    goal: .distance(1, .kilometers),
-                    alert: SpeedThresholdAlert(
-                        target: .init(value: 1, unit: .kilometersPerHour),
-                        metric: .average
-                    )
-                ),
-                IntervalStep(
-                    .recovery,
-                    goal: .distance(1, .kilometers),
-                    alert: SpeedThresholdAlert(
-                        target: .init(value: 1, unit: .kilometersPerHour),
-                        metric: .average
-                    )
-                )
-            ],
-            iterations: 2
-        )
-    ]
-    @State private var cooldown: WorkoutStep = .init(
-        goal: .distance(1, .kilometers),
-        alert: SpeedThresholdAlert(
-            target: .init(value: 1, unit: .kilometersPerHour),
-            metric: .average
-        )
-    )
+    @State private var warmup: WorkoutStep?
+    @State private var intervalBlocks: [IntervalBlock] = []
+    @State private var cooldown: WorkoutStep?
 
     var body: some View {
         VStack() {
@@ -184,25 +121,168 @@ struct AddWorkoutView: View {
 
     var warmupSummary: some View {
         CenteredScrollView {
-            VStack {
-                Text("Warmup")
-                Text(warmup.goal.description)
-                Text(warmup.alert?.description ?? "")
+            ZStack {
+                Button("Add warmup") {
+                    // TODO: Add workout step flow
+                    warmup = .init(
+                        goal: .distance(1, .kilometers),
+                        alert: SpeedThresholdAlert(
+                            target: .init(value: 1, unit: .kilometersPerHour),
+                            metric: .average
+                        )
+                    )
+                }
+                .opacity(warmup == nil ? 1 : 0)
+                .frame(maxHeight: warmup == nil ? nil : 0)
+
+                VStack {
+                    Text("Warmup")
+                    Text(warmup?.goal.description ?? "Placeholder")
+                    Text(warmup?.alert?.description ?? "Placeholder")
+                }
+                .opacity(warmup == nil ? 0 : 1)
+                .frame(maxHeight: warmup == nil ? 0 : nil)
             }
         }
     }
 
     var intervalBlocksSummary: some View {
-        CenteredScrollView {
-            HStack {
-                ForEach($intervalBlocks) { block in
+        CenteredScrollView(.vertical) {
+            VStack {
+                ForEach(intervalBlocks, id: \.self) { block in
                     VStack {
                         Text("Block")
-                        ForEach(block.steps) { step in
-                            Text(step.purpose.wrappedValue.description)
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(block.steps) { step in
+                                    Text(step.purpose.description)
+                                }
+                            }
                         }
-                        Text(block.iterations.wrappedValue.description)
+                        Text(block.iterations.description)
                     }
+                }
+                Button("Add interval block") {
+                    // TODO: Add workout step flow
+                    intervalBlocks.append(
+                        .init(
+                            steps: [
+                                IntervalStep(
+                                    .work,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .recovery,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .work,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .recovery,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .work,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .recovery,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .work,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .recovery,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .work,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .recovery,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .work,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .recovery,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .work,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                ),
+                                IntervalStep(
+                                    .recovery,
+                                    goal: .distance(1, .kilometers),
+                                    alert: SpeedThresholdAlert(
+                                        target: .init(value: 1, unit: .kilometersPerHour),
+                                        metric: .average
+                                    )
+                                )
+                            ],
+                            iterations: 1
+                        )
+                    )
                 }
             }
         }
@@ -210,10 +290,27 @@ struct AddWorkoutView: View {
 
     var cooldownSummary: some View {
         CenteredScrollView {
-            VStack {
-                Text("Cooldown")
-                Text(cooldown.goal.description)
-                Text(cooldown.alert?.description ?? "")
+            ZStack {
+                Button("Add cooldown") {
+                    // TODO: Add workout step flow
+                    cooldown = .init(
+                        goal: .distance(1, .kilometers),
+                        alert: SpeedThresholdAlert(
+                            target: .init(value: 1, unit: .kilometersPerHour),
+                            metric: .average
+                        )
+                    )
+                }
+                .opacity(cooldown == nil ? 1 : 0)
+                .frame(maxHeight: cooldown == nil ? nil : 0)
+
+                VStack {
+                    Text("Cooldown")
+                    Text(cooldown?.goal.description ?? "Placeholder")
+                    Text(cooldown?.alert?.description ?? "Placeholder")
+                }
+                .opacity(cooldown == nil ? 0 : 1)
+                .frame(maxHeight: cooldown == nil ? 0 : nil)
             }
         }
     }
