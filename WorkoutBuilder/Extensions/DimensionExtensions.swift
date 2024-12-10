@@ -20,4 +20,17 @@ extension Dimension: Identifiable {
             return "No goal"
         }
     }
+
+    var unitSymbol: String {
+        switch self {
+        case let length as UnitLength:
+            return length.symbol
+        case let duration as UnitDuration:
+            return duration.symbol
+        case let energy as UnitEnergy:
+            return energy.symbol
+        default:
+            return ""
+        }
+    }
 }

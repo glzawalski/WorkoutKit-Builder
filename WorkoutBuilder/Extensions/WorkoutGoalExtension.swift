@@ -17,9 +17,9 @@ extension WorkoutGoal: CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .distance: return "Distance"
-        case .time: return "Time"
-        case .energy: return "Energy"
+        case let .distance(value, unit): return "Distance \(value) \(unit.unitSymbol)"
+        case let .time(value, unit): return "Time \(value) \(unit.unitSymbol)"
+        case let .energy(value, unit): return "Energy \(value) \(unit.unitSymbol)"
         case .open: return "Open goal"
         @unknown default: return "No goal"
         }
@@ -61,6 +61,16 @@ extension WorkoutGoal: CaseIterable, Identifiable {
         case .energy: return [UnitEnergy.calories, UnitEnergy.kilocalories, UnitEnergy.joules, UnitEnergy.kilojoules, UnitEnergy.kilowattHours]
         case .open: return []
         @unknown default: return []
+        }
+    }
+
+    var `enum`: WorkoutGoalEnum {
+        switch self {
+        case .open: return .open
+        case .distance: return .distance
+        case .time: return .time
+        case .energy: return .energy
+        @unknown default: return .open
         }
     }
 }

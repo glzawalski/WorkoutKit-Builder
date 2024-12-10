@@ -16,17 +16,23 @@ struct AddWorkoutStepView: View {
     let location: HKWorkoutSessionLocationType
 
     @Binding var workoutStep: WorkoutStep
+    @State private var selectedGoal: WorkoutGoalEnum = .open
     @State private var selectedAlert: WorkoutAlertEnum?
 
     var body: some View {
+        let selectedGoalBinding = Binding(get: { selectedGoal },
+                                          set: { selectedGoal = $0; workoutStep.goal = $0.goal })
         let selectedAlertBinding = Binding(get: { selectedAlert },
                                            set: { selectedAlert = $0; workoutStep.alert = $0?.alert })
         VStack {
             // TODO: Add custom segmented control picker with swappable options
-            Picker("Add a goal", selection: $workoutStep.goal) {
-                ForEach(WorkoutGoal.allCases) { goal in
-                    Text(goal.description)
-                        .tag(goal)
+            Picker("Add a goal", selection: selectedGoalBinding) {
+                ForEach(WorkoutGoalEnum.allCases, id: \.self) { goalEnum in
+                    Text(goalEnum.goal.description)
+                        .tag(goalEnum)
+                        .onTapGesture {
+                            workoutStep.goal = goalEnum.goal
+                        }
                 }
             }
             .pickerStyle(.segmented)
@@ -48,6 +54,7 @@ struct AddWorkoutStepView: View {
             }
         }
         .onAppear {
+            selectedGoal = workoutStep.goal.enum
             selectedAlert = workoutStep.alert?.enum
         }
     }
@@ -63,4 +70,24 @@ struct AddWorkoutStepView: View {
         workoutStep: .init(get: { workoutStep },
                            set: { workoutStep = $0 })
     )
+}
+
+enum WorkoutGoalEnum: CaseIterable {
+    case open
+    case distance
+    case time
+    case energy
+
+    var goal: WorkoutGoal {
+        switch self {
+        case .open:
+            return .open
+        case .distance:
+            return .distance(1, .meters)
+        case .time:
+            return .time(1, .minutes)
+        case .energy:
+            return .energy(1, .calories)
+        }
+    }
 }
