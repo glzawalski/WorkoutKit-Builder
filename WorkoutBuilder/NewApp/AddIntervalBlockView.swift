@@ -25,18 +25,15 @@ struct AddIntervalBlockView: View {
                     let block = intervalBlocks[blockIndex]
                     VStack {
                         Text("Block index: \(blockIndex)")
-                        ScrollView(.horizontal) {
+                        CenteredScrollView(.horizontal) {
                             VStack {
-                                HStack {
-                                    ForEach(intervalBlocks[blockIndex].steps.indices, id: \.self) { intervalIndex in
-                                        let intervalStep = block.steps[intervalIndex]
-                                        Text(intervalStep.purpose.description)
-                                            .onTapGesture {
-                                                selectedBlock = blockIndex
-                                                selectedInterval = intervalIndex
-                                                hasSelectedInterval.toggle()
-                                            }
-                                    }
+                                ForEach(intervalBlocks[blockIndex].steps.indices, id: \.self) { intervalIndex in
+                                    Text(intervalBlocks[blockIndex].steps[intervalIndex].purpose.description)
+                                    AddGoalAlertView(
+                                        activity: selectedType,
+                                        location: selectedLocation,
+                                        workoutStep: $intervalBlocks[blockIndex].steps[intervalIndex].step
+                                    )
                                 }
                             }
                         }

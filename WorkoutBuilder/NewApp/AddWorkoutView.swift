@@ -26,7 +26,6 @@ struct AddWorkoutView: View {
     @State private var warmup: WorkoutStep = .init()
 
     @State private var intervalBlocks: [IntervalBlock] = []
-    @State private var didTapIntervalBlocks: Bool = false
 
     @State private var hasCooldown: Bool = false
     @State private var cooldown: WorkoutStep = .init()
@@ -161,32 +160,12 @@ struct AddWorkoutView: View {
 
     var intervalBlocksSummary: some View {
         CenteredScrollView(.vertical) {
-            VStack {
-                ForEach(intervalBlocks, id: \.self) { block in
-                    VStack {
-                        Text("Block")
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(block.steps) { step in
-                                    Text(step.purpose.description)
-                                }
-                            }
-                        }
-                        Text(block.iterations.description)
-                    }
-                }
-                Button("Add interval block") {
-                    didTapIntervalBlocks.toggle()
-                }
-            }
-            .navigationDestination(isPresented: $didTapIntervalBlocks) {
-                if let selectedType {
-                    AddIntervalBlockView(
-                        selectedType: selectedType,
-                        selectedLocation: selectedLocation,
-                        intervalBlocks: $intervalBlocks
-                    )
-                }
+            if let selectedType {
+                AddIntervalBlockView(
+                    selectedType: selectedType,
+                    selectedLocation: selectedLocation,
+                    intervalBlocks: $intervalBlocks
+                )
             }
         }
     }
