@@ -13,8 +13,6 @@ struct WorkoutBuilderApp: App {
     var body: some Scene {
         WindowGroup {
             WorkoutList()
-//                .environmentObject(CustomWorkoutModel())
-//                .environmentObject(Router())
         }
     }
 }
