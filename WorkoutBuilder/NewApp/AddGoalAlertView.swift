@@ -49,12 +49,11 @@ struct AddGoalAlertView: View {
                 Text("Add an alert")
                 // TODO: Add custom segmented control picker with swappable options
                 Picker("Add an alert", selection: selectedAlertBinding) {
+                    Text("None")
+                        .tag(nil as WorkoutAlertEnum?)
                     ForEach(activity.supportedAlerts(location: location), id: \.self) { alertEnum in
                         Text(alertEnum.alert.description)
                             .tag(alertEnum)
-                            .onTapGesture {
-                                workoutStep.alert = alertEnum.alert
-                            }
                     }
                 }
                 .pickerStyle(.inline)
