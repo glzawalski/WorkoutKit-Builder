@@ -59,7 +59,7 @@ struct AddIntervalBlockView: View {
         }
         .navigationDestination(isPresented: $hasSelectedInterval) {
             if let selectedBlock, let selectedInterval {
-                AddWorkoutStepView(
+                AddGoalAlertView(
                     activity: selectedType,
                     location: selectedLocation,
                     workoutStep: $intervalBlocks[selectedBlock].steps[selectedInterval].step

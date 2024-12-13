@@ -24,14 +24,12 @@ struct AddWorkoutView: View {
 
     @State private var hasWarmup: Bool = false
     @State private var warmup: WorkoutStep = .init()
-    @State private var didTapWarmup: Bool = false
 
     @State private var intervalBlocks: [IntervalBlock] = []
     @State private var didTapIntervalBlocks: Bool = false
 
     @State private var hasCooldown: Bool = false
     @State private var cooldown: WorkoutStep = .init()
-    @State private var didTapCooldown: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -140,26 +138,23 @@ struct AddWorkoutView: View {
                 }
                 .opacity(hasWarmup ? 0 : 1)
                 .frame(maxHeight: hasWarmup ? 0 : nil)
+                .animation(.default, value: hasWarmup)
 
                 VStack {
-                    Text("Warmup")
-                    Text(warmup.goal.description)
-                    Text(warmup.alert?.description ?? "No alert set")
+                    if let selectedType {
+                        AddGoalAlertView(
+                            activity: selectedType,
+                            location: selectedLocation,
+                            workoutStep: $warmup
+                        )
+                    }
+                    Button("Remove warmup") {
+                        hasWarmup.toggle()
+                    }
                 }
                 .opacity(hasWarmup ? 1 : 0)
                 .frame(maxHeight: hasWarmup ? nil : 0)
-                .onTapGesture {
-                    didTapWarmup.toggle()
-                }
-            }
-            .navigationDestination(isPresented: $didTapWarmup) {
-                if let selectedType {
-                    AddWorkoutStepView(
-                        activity: selectedType,
-                        location: selectedLocation,
-                        workoutStep: $warmup
-                    )
-                }
+                .animation(.default, value: hasWarmup)
             }
         }
     }
@@ -204,26 +199,22 @@ struct AddWorkoutView: View {
                 }
                 .opacity(hasCooldown ? 0 : 1)
                 .frame(maxHeight: hasCooldown ? 0 : nil)
+                .animation(.default, value: hasCooldown)
 
                 VStack {
-                    Text("Cooldown")
-                    Text(cooldown.goal.description)
-                    Text(cooldown.alert?.description ?? "No alert set")
+                    if let selectedType {
+                        AddGoalAlertView(
+                            activity: selectedType,
+                            location: selectedLocation,
+                            workoutStep: $cooldown
+                        )
+                    }
+                    Button("Remove cooldwon") {
+                        hasCooldown.toggle()
+                    }
                 }
                 .opacity(hasCooldown ? 1 : 0)
                 .frame(maxHeight: hasCooldown ? nil : 0)
-                .onTapGesture {
-                    didTapCooldown.toggle()
-                }
-            }
-            .navigationDestination(isPresented: $didTapCooldown) {
-                if let selectedType {
-                    AddWorkoutStepView(
-                        activity: selectedType,
-                        location: selectedLocation,
-                        workoutStep: $cooldown
-                    )
-                }
             }
         }
     }

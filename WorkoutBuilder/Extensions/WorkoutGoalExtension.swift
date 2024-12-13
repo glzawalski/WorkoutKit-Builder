@@ -64,13 +64,23 @@ extension WorkoutGoal: CaseIterable, Identifiable {
         }
     }
 
-    var `enum`: WorkoutGoalEnum {
+    var `enum`: WorkoutGoalOptions {
         switch self {
         case .open: return .open
-        case .distance: return .distance
-        case .time: return .time
-        case .energy: return .energy
-        @unknown default: return .open
+        case .distance(_ , let unitLength) where unitLength == .feet: return .feet
+        case .distance(_ , let unitLength) where unitLength == .meters: return .meters
+        case .distance(_ , let unitLength) where unitLength == .yards: return .yards
+        case .distance(_ , let unitLength) where unitLength == .kilometers: return .kilometers
+        case .distance(_ , let unitLength) where unitLength == .miles: return .miles
+        case .time(_ , let unitDuration) where unitDuration == .seconds : return .seconds
+        case .time(_ , let unitDuration) where unitDuration == .minutes : return .minutes
+        case .time(_ , let unitDuration) where unitDuration == .hours : return .hours
+        case .energy(_ , let unitEnergy) where unitEnergy == .calories: return .calories
+        case .energy(_ , let unitEnergy) where unitEnergy == .kilocalories: return .kilocalories
+        case .energy(_ , let unitEnergy) where unitEnergy == .joules : return .joules
+        case .energy(_ , let unitEnergy) where unitEnergy == .kilojoules: return .kilojoules
+        case .energy(_ , let unitEnergy) where unitEnergy == .kilowattHours: return .kilowattHours
+        default: return .open
         }
     }
 }
