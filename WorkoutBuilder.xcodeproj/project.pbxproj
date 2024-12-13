@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7801D3B32B6C9871006E81FE /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7801D3B22B6C9871006E81FE /* Algorithms */; };
 		7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3B42B6C9C41006E81FE /* StringExtension.swift */; };
 		7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3BF2B6F1D5F006E81FE /* GoalType.swift */; };
 		7801D3C22B6F1D88006E81FE /* GoalUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3C12B6F1D88006E81FE /* GoalUnit.swift */; };
@@ -69,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7801D3B32B6C9871006E81FE /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +179,6 @@
 			);
 			name = WorkoutBuilder;
 			packageProductDependencies = (
-				7801D3B22B6C9871006E81FE /* Algorithms */,
 			);
 			productName = WorkoutBuilder;
 			productReference = 78FDA36F2A42983600A0EDF3 /* WorkoutBuilder.app */;
@@ -212,7 +209,6 @@
 			);
 			mainGroup = 78FDA3662A42983600A0EDF3;
 			packageReferences = (
-				7801D3B12B6C9871006E81FE /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 78FDA3702A42983600A0EDF3 /* Products */;
 			projectDirPath = "";
@@ -470,25 +466,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		7801D3B12B6C9871006E81FE /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		7801D3B22B6C9871006E81FE /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7801D3B12B6C9871006E81FE /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 78FDA3672A42983600A0EDF3 /* Project object */;
 }

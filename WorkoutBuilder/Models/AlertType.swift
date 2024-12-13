@@ -50,9 +50,6 @@ enum AlertType: String, CaseIterable {
             return alertType
         }.compactMap { $0 }
     }
-
-    public static var chunks = supportedCases.chunks(ofCount: 2)
-
 }
 
 enum AlertUnit: String {

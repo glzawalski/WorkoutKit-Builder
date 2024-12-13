@@ -7,7 +7,6 @@
 
 import Foundation
 import WorkoutKit
-import Algorithms
 
 enum GoalType: String, CaseIterable {
     case distance = "Distance"
@@ -36,8 +35,6 @@ enum GoalType: String, CaseIterable {
             return goalType
         }.compactMap { $0 }
     }
-
-    public static var chunks = supportedCases.chunks(ofCount: 2)
 
     public var defaultUnit: GoalUnit? {
         switch self {

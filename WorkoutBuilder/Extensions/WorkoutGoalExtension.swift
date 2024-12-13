@@ -7,7 +7,6 @@
 
 import Foundation
 import WorkoutKit
-import Algorithms
 import HealthKit
 
 extension WorkoutGoal: CaseIterable, Identifiable {
