@@ -6,24 +6,34 @@
 //
 
 import SwiftUI
+import WorkoutKit
 
 struct WorkoutList: View {
-    @State private var workouts: [Workout] = []
+    @State private var workouts: [CustomWorkout] = []
     @State private var isAddingWorkout: Bool = false
+
+    @State private var workoutPlan: WorkoutPlan = .init(.custom(.init(activity: .americanFootball)))
+    @State private var isPresentingPlan: Bool = false
 
     var body: some View {
         VStack {
-            List(workouts) { workout in
-                Text(workout.name)
+            List(workouts, id: \.self) { workout in
+                Text(workout.displayName ?? "")
+                    .onTapGesture {
+                        workoutPlan = .init(.custom(workout))
+                        isPresentingPlan.toggle()
+                    }
             }
             .overlay {
-                if workouts.isEmpty { noWorkoutsView }
+                noWorkoutsView
+                    .opacity(workouts.isEmpty ? 1 : 0)
             }
             addWorkoutButton
         }
         .sheet(isPresented: $isAddingWorkout) {
             AddWorkoutView(workouts: $workouts)
         }
+        .workoutPreview(workoutPlan, isPresented: $isPresentingPlan)
     }
 
     var noWorkoutsView: some View {

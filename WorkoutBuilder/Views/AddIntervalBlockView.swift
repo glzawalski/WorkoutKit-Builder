@@ -22,7 +22,6 @@ struct AddIntervalBlockView: View {
         CenteredScrollView {
             VStack {
                 ForEach(intervalBlocks.indices, id: \.self) { blockIndex in
-                    let block = intervalBlocks[blockIndex]
                     VStack {
                         Text("Block index: \(blockIndex)")
                         CenteredScrollView(.horizontal) {

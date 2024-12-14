@@ -12,7 +12,7 @@ import WorkoutKit
 struct AddWorkoutView: View {
     @Environment(\.dismiss) var dismiss
 
-    @Binding var workouts: [Workout]
+    @Binding var workouts: [CustomWorkout]
 
     @State private var name: String = "My Workout"
 
@@ -32,15 +32,15 @@ struct AddWorkoutView: View {
 
     var body: some View {
         NavigationStack {
-            VStack() {
+            VStack {
                 Group {
                     workoutName
 
-                    Spacer().frame(height: 30)
+                    Spacer()
 
                     workoutLocation
 
-                    Spacer().frame(height: 100)
+                    Spacer()
 
                     TabView {
                         warmupSummary
@@ -54,6 +54,22 @@ struct AddWorkoutView: View {
                     .padding(.bottom)
 
                     Spacer()
+
+                    Button("Add workout") {
+                        if let selectedType {
+                            workouts.append(
+                                .init(
+                                    activity: selectedType,
+                                    location: selectedLocation,
+                                    displayName: name,
+                                    warmup: hasWarmup ? warmup : nil,
+                                    blocks: intervalBlocks,
+                                    cooldown: hasCooldown ? cooldown : nil
+                                )
+                            )
+                        }
+                        dismiss()
+                    }
                 }
                 .opacity(selectedType != nil ? 1 : 0)
                 .animation(.bouncy.delay(0.5), value: selectedType != nil)

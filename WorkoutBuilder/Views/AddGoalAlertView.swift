@@ -15,7 +15,7 @@ struct AddGoalAlertView: View {
 
     @Binding var workoutStep: WorkoutStep
     @State private var selectedGoal: WorkoutGoalOptions = .open
-    @State private var selectedGoalValue: Double = 0
+    @State private var selectedGoalValue: Double = 1 // TODO: Ensure its never 0
     @State private var selectedAlert: WorkoutAlertEnum?
     @State private var presentSheet: Bool = false
 
@@ -33,7 +33,7 @@ struct AddGoalAlertView: View {
                     .animation(.default, value: selectedGoal == .open)
                 // TODO: Add custom segmented control picker with swappable options and resetting option
                 Picker("Add a goal", selection: selectedGoalBinding) {
-                    ForEach(WorkoutGoalOptions.allCases, id: \.self) { goalOptions in
+                    ForEach(activity.supportedGoals(location: location), id: \.self) { goalOptions in
                         Text("\(goalOptions.rawValue)")
                             .tag(goalOptions)
                     }
@@ -57,6 +57,31 @@ struct AddGoalAlertView: View {
                     }
                 }
                 .pickerStyle(.inline)
+                .onChange(of: selectedAlert) { _, newValue in
+                    switch newValue {
+                    case .none:
+                        return
+                    case .cadenceRange:
+                        print("Cadence range")
+                    case .cadenceThreshold:
+                        print("Cadence threshold")
+                    case .heartRateRange:
+                        print("Heart rate range")
+                    case .heartRateZone:
+                        print("Heart rate zone")
+                        presentSheet.toggle()
+                    case .powerRange:
+                        print("Power range")
+                    case .powerThreshold:
+                        print("Power threshold")
+                    case .powerZone:
+                        print("Power zone")
+                    case .speedRange:
+                        print("Speed range")
+                    case .speedThreshold:
+                        print("Speed threshold")
+                    }
+                }
             }
         }
         .onAppear {
@@ -76,8 +101,8 @@ struct AddGoalAlertView: View {
 }
 
 #Preview {
-    var workoutStep: WorkoutStep = .init(goal: .energy(1, .calories),
-                                         alert: .heartRate(zone: 1))
+    var workoutStep: WorkoutStep = .init(goal: .open,
+                                         alert: nil)
 
     AddGoalAlertView(
         activity: .americanFootball,
