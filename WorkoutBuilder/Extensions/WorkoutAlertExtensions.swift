@@ -162,3 +162,69 @@ enum WorkoutAlertEnum: CaseIterable {
         }
     }
 }
+
+// MARK: - Range alerts
+extension WorkoutAlertEnum {
+    func rangeAlert(with range: ClosedRange<Measurement<UnitFrequency>>) -> (any WorkoutAlert)? {
+        switch self {
+        case .heartRateRange:
+            return HeartRateRangeAlert(target: range)
+        case .cadenceRange:
+            return CadenceRangeAlert(target: range)
+        default:
+            return nil
+        }
+    }
+
+    func rangeAlert(with range: ClosedRange<Measurement<UnitPower>>) -> (any WorkoutAlert)? {
+        if case .powerRange = self {
+            return PowerRangeAlert(target: range)
+        }
+        return nil
+    }
+
+    func rangeAlert(with range: ClosedRange<Measurement<UnitSpeed>>, metric: WorkoutAlertMetric) -> (any WorkoutAlert)? {
+        if case .speedRange = self {
+            return SpeedRangeAlert(target: range, metric: metric)
+        }
+        return nil
+    }
+}
+
+// MARK: - Zone alerts
+extension WorkoutAlertEnum {
+    func zoneAlert(with zone: Int) -> (any WorkoutAlert)? {
+        switch self {
+        case .heartRateZone:
+            return HeartRateZoneAlert(zone: zone)
+        case .powerZone:
+            return PowerZoneAlert(zone: zone)
+        default:
+            return nil
+        }
+    }
+}
+
+// MARK: - Threshold alerts
+extension WorkoutAlertEnum {
+    func thresholdAlert(with target: Measurement<UnitFrequency>) -> (any WorkoutAlert)? {
+        if case .cadenceThreshold = self {
+            return CadenceThresholdAlert(target: target)
+        }
+        return nil
+    }
+
+    func thresholdAlert(with target: Measurement<UnitPower>) -> (any WorkoutAlert)? {
+        if case .powerThreshold = self {
+            return PowerThresholdAlert(target: target)
+        }
+        return nil
+    }
+
+    func thresholdAlert(with target: Measurement<UnitSpeed>, metric: WorkoutAlertMetric) -> (any WorkoutAlert)? {
+        if case .speedThreshold = self {
+            return SpeedThresholdAlert(target: target, metric: metric)
+        }
+        return nil
+    }
+}

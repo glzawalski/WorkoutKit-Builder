@@ -14,10 +14,30 @@ struct AddGoalAlertView: View {
     let location: HKWorkoutSessionLocationType
 
     @Binding var workoutStep: WorkoutStep
+
     @State private var selectedGoal: WorkoutGoalOptions = .open
     @State private var selectedGoalValue: Double = 1 // TODO: Ensure its never 0
+    @State private var presentGoalValueInput: Bool = false
+
     @State private var selectedAlert: WorkoutAlertEnum?
-    @State private var presentSheet: Bool = false
+    @State private var selectedAlertRangeFrequency: ClosedRange<Measurement<UnitFrequency>> = .init(
+        uncheckedBounds: (lower: .init(value: 1, unit: .hertz),
+                          upper: .init(value: 2, unit: .hertz))
+    )
+    @State private var selectedAlertRangePower: ClosedRange<Measurement<UnitPower>> = .init(
+        uncheckedBounds: (lower: .init(value: 1, unit: .watts),
+                          upper: .init(value: 2, unit: .watts))
+    )
+    @State private var selectedAlertRangeSpeed: ClosedRange<Measurement<UnitSpeed>> = .init(
+        uncheckedBounds: (lower: .init(value: 1, unit: .metersPerSecond),
+                          upper: .init(value: 2, unit: .metersPerSecond))
+    )
+    @State private var selectedAlertZone: Int = 1
+    @State private var selectedAlertThresholdFrequency: Measurement<UnitFrequency> = .init(value: 1, unit: .hertz)
+    @State private var selectedAlertThresholdPower: Measurement<UnitPower> = .init(value: 1, unit: .watts)
+    @State private var selectedAlertThresholdSpeed: Measurement<UnitSpeed> = .init(value: 1, unit: .metersPerSecond)
+    @State private var selectedAlertMetric: WorkoutAlertMetric = .average
+    @State private var presentAlertInput: Bool = false
 
     var body: some View {
         let selectedGoalBinding = Binding(get: { selectedGoal },
@@ -41,7 +61,7 @@ struct AddGoalAlertView: View {
                 .pickerStyle(.inline)
                 .onChange(of: selectedGoal) { _, newValue in
                     guard newValue != .open else { return }
-                    presentSheet.toggle()
+                    presentGoalValueInput.toggle()
                 }
             }
 
@@ -58,29 +78,8 @@ struct AddGoalAlertView: View {
                 }
                 .pickerStyle(.inline)
                 .onChange(of: selectedAlert) { _, newValue in
-                    switch newValue {
-                    case .none:
-                        return
-                    case .cadenceRange:
-                        print("Cadence range")
-                    case .cadenceThreshold:
-                        print("Cadence threshold")
-                    case .heartRateRange:
-                        print("Heart rate range")
-                    case .heartRateZone:
-                        print("Heart rate zone")
-                        presentSheet.toggle()
-                    case .powerRange:
-                        print("Power range")
-                    case .powerThreshold:
-                        print("Power threshold")
-                    case .powerZone:
-                        print("Power zone")
-                    case .speedRange:
-                        print("Speed range")
-                    case .speedThreshold:
-                        print("Speed threshold")
-                    }
+                    guard newValue != nil else { return }
+                    presentAlertInput.toggle()
                 }
             }
         }
@@ -88,15 +87,76 @@ struct AddGoalAlertView: View {
             selectedGoal = workoutStep.goal.enum
             selectedAlert = workoutStep.alert?.enum
         }
-        .sheet(isPresented: $presentSheet) {
-            modal
+        .sheet(isPresented: $presentGoalValueInput) {
+            goalValueInput
+        }
+        .sheet(isPresented: $presentAlertInput) {
+            rangeAlertInput
         }
     }
 
-    private var modal: some View {
+    private var goalValueInput: some View {
         let selectedGoalValueBinding = Binding(get: { selectedGoalValue },
                                                set: { selectedGoalValue = $0; workoutStep.goal = selectedGoal.goal(with: $0) })
-        return TextField("Goal value:", value: selectedGoalValueBinding, formatter: NumberFormatter())
+        return VStack {
+            Text("Goal value:")
+            TextField("Goal value:", value: selectedGoalValueBinding, formatter: NumberFormatter())
+        }
+    }
+
+    private var rangeAlertInput: some View {
+        Group {
+            switch selectedAlert {
+            case .heartRateRange, .cadenceRange, .powerRange, .speedRange:
+                rangeAlertValueInput
+            case .heartRateZone, .powerZone:
+                zoneAlertValueInput
+            case .cadenceThreshold, .powerThreshold, .speedThreshold:
+                thresholdAlertValueInput
+            case nil:
+                EmptyView()
+            }
+        }
+    }
+
+    private var rangeAlertValueInput: some View {
+        Text("Range input")
+    }
+
+    private var zoneAlertValueInput: some View {
+        Text("Zone input")
+    }
+
+    private var thresholdAlertValueInput: some View {
+        let frequencyBinding = Binding(get: { selectedAlertThresholdFrequency },
+                                       set: { selectedAlertThresholdFrequency = $0; workoutStep.alert = selectedAlert?.thresholdAlert(with: selectedAlertThresholdFrequency) })
+        let powerBinding = Binding(get: { selectedAlertThresholdPower },
+                                   set: { selectedAlertThresholdPower = $0; workoutStep.alert = selectedAlert?.thresholdAlert(with: selectedAlertThresholdPower) })
+        let speedBinding = Binding(get: { selectedAlertThresholdSpeed },
+                                   set: { selectedAlertThresholdSpeed = $0; workoutStep.alert = selectedAlert?.thresholdAlert(with: selectedAlertThresholdSpeed, metric: selectedAlertMetric) })
+        return VStack {
+            Text("Alert threshold value:")
+
+            TextField("Alert threshold value:", value: frequencyBinding, formatter: NumberFormatter())
+                .opacity(selectedAlert == .cadenceThreshold ? 1 : 0)
+                .frame(maxWidth: selectedAlert == .cadenceThreshold ? nil : 0, maxHeight: selectedAlert == .cadenceThreshold ? nil : 0)
+
+            TextField("Alert threshold value:", value: powerBinding, formatter: NumberFormatter())
+                .opacity(selectedAlert == .powerThreshold ? 1 : 0)
+                .frame(maxWidth: selectedAlert == .powerThreshold ? nil : 0, maxHeight: selectedAlert == .powerThreshold ? nil : 0)
+
+            HStack {
+                TextField("Alert threshold value:", value: speedBinding, formatter: NumberFormatter())
+                    .opacity(selectedAlert == .speedThreshold ? 1 : 0)
+                    .frame(maxWidth: selectedAlert == .speedThreshold ? nil : 0, maxHeight: selectedAlert == .speedThreshold ? nil : 0)
+                Picker("Alert unit", selection: $selectedAlertMetric) {
+                    ForEach(WorkoutAlertMetric.allCases, id: \.self) { metric in
+                        Text(metric.description)
+                            .tag(metric)
+                    }
+                }
+            }
+        }
     }
 }
 
