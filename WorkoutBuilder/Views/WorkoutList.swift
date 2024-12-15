@@ -9,20 +9,20 @@ import SwiftUI
 import WorkoutKit
 
 struct WorkoutList: View {
-    @State private var workouts: [CustomWorkout] = []
-    @State private var isAddingWorkout: Bool = false
+    @Environment(WorkoutBuilderAppState.self) private var state
 
-    @State private var workoutPlan: WorkoutPlan = .init(.custom(.init(activity: .americanFootball)))
+    @State private var isAddingWorkout: Bool = false
     @State private var isPresentingPlan: Bool = false
 
     var body: some View {
         VStack {
             List {
                 Section {
-                    ForEach(workouts, id: \.self) { workout in
-                        Text(workout.displayName ?? "")
+                    ForEach(state.workouts.indices, id: \.self) { index in
+                        Text(state.workouts[index].displayName ?? "")
                             .onTapGesture {
-                                workoutPlan = .init(.custom(workout))
+                                state.selectedWorkoutIndex = index
+                                state.createPlan()
                                 isPresentingPlan.toggle()
                             }
                     }
@@ -33,12 +33,12 @@ struct WorkoutList: View {
         }
         .overlay {
             noWorkoutsView
-                .opacity(workouts.isEmpty ? 1 : 0)
+                .opacity(state.workouts.isEmpty ? 1 : 0)
         }
         .sheet(isPresented: $isAddingWorkout) {
-            AddWorkoutView(workouts: $workouts)
+            AddWorkoutView()
         }
-        .workoutPreview(workoutPlan, isPresented: $isPresentingPlan)
+        .workoutPreview(state.workoutPlan, isPresented: $isPresentingPlan)
     }
 
     var noWorkoutsView: some View {
@@ -55,6 +55,7 @@ struct WorkoutList: View {
 
     var addWorkoutButton: some View {
         Button("Add Workout") {
+            state.resetAddWorkoutProperties()
             isAddingWorkout.toggle()
         }
     }
@@ -62,4 +63,5 @@ struct WorkoutList: View {
 
 #Preview {
     WorkoutList()
+        .environment(WorkoutBuilderAppState())
 }

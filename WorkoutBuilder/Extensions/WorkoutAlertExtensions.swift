@@ -221,8 +221,9 @@ extension WorkoutAlertEnum {
         return nil
     }
 
-    func thresholdAlert(with target: Measurement<UnitSpeed>, metric: WorkoutAlertMetric) -> (any WorkoutAlert)? {
+    func thresholdAlert(value: Double, unit: UnitSpeed, metric: WorkoutAlertMetric) -> (any WorkoutAlert)? {
         if case .speedThreshold = self {
+            let target = Measurement(value: value, unit: unit)
             return SpeedThresholdAlert(target: target, metric: metric)
         }
         return nil

@@ -11,24 +11,7 @@ import WorkoutKit
 
 struct AddWorkoutView: View {
     @Environment(\.dismiss) var dismiss
-
-    @Binding var workouts: [CustomWorkout]
-
-    @State private var name: String = "My Workout"
-
-    @State private var selectedType: HKWorkoutActivityType?
-
-    @State private var selectedLocation: HKWorkoutSessionLocationType = .indoor
-
-    @State private var selectedLocationToggle: Bool = false
-
-    @State private var hasWarmup: Bool = false
-    @State private var warmup: WorkoutStep = .init()
-
-    @State private var intervalBlocks: [IntervalBlock] = []
-
-    @State private var hasCooldown: Bool = false
-    @State private var cooldown: WorkoutStep = .init()
+    @Environment(WorkoutBuilderAppState.self) private var state
 
     var body: some View {
         NavigationStack {
@@ -56,39 +39,28 @@ struct AddWorkoutView: View {
                     Spacer()
 
                     Button("Add workout") {
-                        if let selectedType {
-                            workouts.append(
-                                .init(
-                                    activity: selectedType,
-                                    location: selectedLocation,
-                                    displayName: name,
-                                    warmup: hasWarmup ? warmup : nil,
-                                    blocks: intervalBlocks,
-                                    cooldown: hasCooldown ? cooldown : nil
-                                )
-                            )
-                        }
+                        state.addWorkout()
                         dismiss()
                     }
                 }
-                .opacity(selectedType != nil ? 1 : 0)
-                .animation(.bouncy.delay(0.5), value: selectedType != nil)
+                .opacity(state.activity != nil ? 1 : 0)
+                .animation(.bouncy.delay(0.5), value: state.activity != nil)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background {
                 workoutType
-                    .opacity(selectedType != nil ? 1 : 0)
-                    .animation(.bouncy.delay(0.2), value: selectedType != nil)
+                    .opacity(state.activity != nil ? 1 : 0)
+                    .animation(.bouncy.delay(0.2), value: state.activity != nil)
 
                 workoutTypePicker
-                    .opacity(selectedType == nil ? 1 : 0)
-                    .animation(.default, value: selectedType == nil)
+                    .opacity(state.activity == nil ? 1 : 0)
+                    .animation(.default, value: state.activity == nil)
             }
         }
     }
 
     var workoutName: some View {
-        TextField("My Workout", text: $name, axis: .vertical)
+        TextField("My Workout", text: Bindable(state).displayName, axis: .vertical)
             .font(.title)
             .multilineTextAlignment(.center)
     }
@@ -113,8 +85,8 @@ struct AddWorkoutView: View {
                             Color.gray.opacity(0.4).cornerRadius(16)
                         }
                         .onTapGesture {
-                            selectedType = type
-                            name = "My \(type.displayName) Workout"
+                            state.activity = type
+                            state.displayName = "My \(type.displayName) Workout"
                         }
                     }
                 }
@@ -126,7 +98,7 @@ struct AddWorkoutView: View {
     }
 
     var workoutType: some View {
-        Image(systemName: selectedType?.displayImage ?? "")
+        Image(systemName: state.activity?.displayImage ?? "")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -135,7 +107,7 @@ struct AddWorkoutView: View {
     }
 
     var workoutLocation: some View {
-        Picker("Select Location", selection: $selectedLocation) {
+        Picker("Select Location", selection: Bindable(state).location) {
             ForEach(HKWorkoutSessionLocationType.allCases, id:\.self) { location in
                 Text(location.displayName)
                     .tag(location)
@@ -149,40 +121,28 @@ struct AddWorkoutView: View {
         CenteredScrollView {
             ZStack {
                 Button("Add warmup") {
-                    hasWarmup.toggle()
+                    state.hasWarmup.toggle()
                 }
-                .opacity(hasWarmup ? 0 : 1)
-                .frame(maxHeight: hasWarmup ? 0 : nil)
-                .animation(.default, value: hasWarmup)
+                .opacity(state.hasWarmup ? 0 : 1)
+                .frame(maxHeight: state.hasWarmup ? 0 : nil)
+                .animation(.default, value: state.hasWarmup)
 
                 VStack {
-                    if let selectedType {
-                        AddGoalAlertView(
-                            activity: selectedType,
-                            location: selectedLocation,
-                            workoutStep: $warmup
-                        )
-                    }
+                    AddWarmupView()
                     Button("Remove warmup") {
-                        hasWarmup.toggle()
+                        state.hasWarmup.toggle()
                     }
                 }
-                .opacity(hasWarmup ? 1 : 0)
-                .frame(maxHeight: hasWarmup ? nil : 0)
-                .animation(.default, value: hasWarmup)
+                .opacity(state.hasWarmup ? 1 : 0)
+                .frame(maxHeight: state.hasWarmup ? nil : 0)
+                .animation(.default, value: state.hasWarmup)
             }
         }
     }
 
     var intervalBlocksSummary: some View {
         CenteredScrollView(.vertical) {
-            if let selectedType {
-                AddIntervalBlockView(
-                    selectedType: selectedType,
-                    selectedLocation: selectedLocation,
-                    intervalBlocks: $intervalBlocks
-                )
-            }
+            AddIntervalBlockView()
         }
     }
 
@@ -190,26 +150,20 @@ struct AddWorkoutView: View {
         CenteredScrollView {
             ZStack {
                 Button("Add cooldown") {
-                    hasCooldown.toggle()
+                    state.hasCooldown.toggle()
                 }
-                .opacity(hasCooldown ? 0 : 1)
-                .frame(maxHeight: hasCooldown ? 0 : nil)
-                .animation(.default, value: hasCooldown)
+                .opacity(state.hasCooldown ? 0 : 1)
+                .frame(maxHeight: state.hasCooldown ? 0 : nil)
+                .animation(.default, value: state.hasCooldown)
 
                 VStack {
-                    if let selectedType {
-                        AddGoalAlertView(
-                            activity: selectedType,
-                            location: selectedLocation,
-                            workoutStep: $cooldown
-                        )
-                    }
+                    AddCooldownView()
                     Button("Remove cooldwon") {
-                        hasCooldown.toggle()
+                        state.hasCooldown.toggle()
                     }
                 }
-                .opacity(hasCooldown ? 1 : 0)
-                .frame(maxHeight: hasCooldown ? nil : 0)
+                .opacity(state.hasCooldown ? 1 : 0)
+                .frame(maxHeight: state.hasCooldown ? nil : 0)
             }
         }
     }
@@ -234,10 +188,6 @@ struct CenteredScrollView<Content: View>: View {
         }
         .scrollIndicators(.hidden)
     }
-}
-
-#Preview {
-    AddWorkoutView(workouts: .constant([]))
 }
 
 // https://stackademic.com/blog/swiftui-dropdown-menu-3-ways-picker-menu-and-custom-from-scratch

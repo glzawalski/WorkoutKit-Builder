@@ -10,9 +10,12 @@ import HealthKit
 
 @main
 struct WorkoutBuilderApp: App {
+    @State private var state: WorkoutBuilderAppState = .init()
+
     var body: some Scene {
         WindowGroup {
             WorkoutList()
+                .environment(state)
         }
     }
 }

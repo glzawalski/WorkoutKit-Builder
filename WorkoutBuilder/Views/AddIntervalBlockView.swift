@@ -10,67 +10,40 @@ import WorkoutKit
 import HealthKit
 
 struct AddIntervalBlockView: View {
-    @State var selectedType: HKWorkoutActivityType
-    @State var selectedLocation: HKWorkoutSessionLocationType
-    @Binding var intervalBlocks: [IntervalBlock]
-
-    @State private var hasSelectedInterval: Bool = false
-    @State private var selectedBlock: Int?
-    @State private var selectedInterval: Int?
+    @Environment(WorkoutBuilderAppState.self) var state
 
     var body: some View {
         CenteredScrollView {
             VStack {
-                ForEach(intervalBlocks.indices, id: \.self) { blockIndex in
+                ForEach(state.intervalBlocks.indices, id: \.self) { blockIndex in
+                    let block = state.intervalBlocks[blockIndex]
                     VStack {
                         Text("Block index: \(blockIndex)")
                         CenteredScrollView(.horizontal) {
                             VStack {
-                                ForEach(intervalBlocks[blockIndex].steps.indices, id: \.self) { intervalIndex in
-                                    Text(intervalBlocks[blockIndex].steps[intervalIndex].purpose.description)
-                                    AddGoalAlertView(
-                                        activity: selectedType,
-                                        location: selectedLocation,
-                                        workoutStep: $intervalBlocks[blockIndex].steps[intervalIndex].step
-                                    )
+                                ForEach(block.steps.indices, id: \.self) { intervalIndex in
+                                    let interval = block.steps[intervalIndex]
+                                    Text(interval.purpose.description)
+                                    AddGoalAlertView(workoutStep: Bindable(state).intervalBlocks[blockIndex].steps[intervalIndex].step)
                                 }
                             }
                         }
                         HStack {
                             Button("Add work step") {
-                                intervalBlocks[blockIndex].steps.append(.init(.work))
+                                state.addNewStepToBlock(blockIndex, purpose: .work)
                             }
 
                             Button("Add rest step") {
-                                intervalBlocks[blockIndex].steps.append(.init(.recovery))
+                                state.addNewStepToBlock(blockIndex, purpose: .recovery)
                             }
                         }
-                        Text("Repetitions: \(intervalBlocks[blockIndex].iterations.description)")
+                        Text("Repetitions: \(state.intervalBlocks[blockIndex].iterations.description)")
                     }
                 }
                 Button("Add block") {
-                    intervalBlocks.append(.init(steps: [], iterations: Int.random(in: 1...10)))
+                    state.addNewBlock(iterations: 1) // TODO: Ensure its never 0
                 }
             }
         }
-        .navigationDestination(isPresented: $hasSelectedInterval) {
-            if let selectedBlock, let selectedInterval {
-                AddGoalAlertView(
-                    activity: selectedType,
-                    location: selectedLocation,
-                    workoutStep: $intervalBlocks[selectedBlock].steps[selectedInterval].step
-                )
-            }
-        }
-    }
-}
-
-#Preview {
-    NavigationStack {
-        AddIntervalBlockView(
-            selectedType: .americanFootball,
-            selectedLocation: .indoor,
-            intervalBlocks: .constant([])
-        )
     }
 }
