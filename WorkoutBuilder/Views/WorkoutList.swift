@@ -17,18 +17,23 @@ struct WorkoutList: View {
 
     var body: some View {
         VStack {
-            List(workouts, id: \.self) { workout in
-                Text(workout.displayName ?? "")
-                    .onTapGesture {
-                        workoutPlan = .init(.custom(workout))
-                        isPresentingPlan.toggle()
+            List {
+                Section {
+                    ForEach(workouts, id: \.self) { workout in
+                        Text(workout.displayName ?? "")
+                            .onTapGesture {
+                                workoutPlan = .init(.custom(workout))
+                                isPresentingPlan.toggle()
+                            }
                     }
+                } footer: {
+                    addWorkoutButton
+                }
             }
-            .overlay {
-                noWorkoutsView
-                    .opacity(workouts.isEmpty ? 1 : 0)
-            }
-            addWorkoutButton
+        }
+        .overlay {
+            noWorkoutsView
+                .opacity(workouts.isEmpty ? 1 : 0)
         }
         .sheet(isPresented: $isAddingWorkout) {
             AddWorkoutView(workouts: $workouts)
@@ -38,10 +43,14 @@ struct WorkoutList: View {
 
     var noWorkoutsView: some View {
         ContentUnavailableView(
-            "No workouts yet.",
+            "No workouts yet",
             systemImage: "x.circle",
-            description: Text("You have yet to add a workout to your list.")
+            description: Text("You have yet to add a workout to your list\nTap to add a workout")
         )
+        .background(Color.white)
+        .onTapGesture {
+            isAddingWorkout.toggle()
+        }
     }
 
     var addWorkoutButton: some View {
