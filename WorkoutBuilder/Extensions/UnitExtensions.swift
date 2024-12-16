@@ -24,21 +24,21 @@ extension UnitSpeed {
         return [.metersPerSecond, .kilometersPerHour, .milesPerHour]
     }
 }
-
-extension UnitLength {
-    public static var allCases: [UnitLength] {
-        return [.feet, .meters, .yards, .kilometers, .miles]
-    }
-}
-
-extension UnitDuration {
-    public static var allCases: [UnitDuration] {
-        return [.seconds, .minutes, .hours]
-    }
-}
-
-extension UnitEnergy {
-    public static var allCases: [UnitEnergy] {
-        return [.calories, .kilocalories, .joules, .kilojoules, .kilowattHours]
-    }
-}
+//
+//extension UnitLength {
+//    public static var allCases: [UnitLength] {
+//        return [.feet, .meters, .yards, .kilometers, .miles]
+//    }
+//}
+//
+//extension UnitDuration {
+//    public static var allCases: [UnitDuration] {
+//        return [.seconds, .minutes, .hours]
+//    }
+//}
+//
+//extension UnitEnergy {
+//    public static var allCases: [UnitEnergy] {
+//        return [.calories, .kilocalories, .joules, .kilojoules, .kilowattHours]
+//    }
+//}

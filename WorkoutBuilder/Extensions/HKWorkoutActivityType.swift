@@ -9,7 +9,7 @@ import Foundation
 import HealthKit
 import WorkoutKit
 
-extension HKWorkoutActivityType: CaseIterable {
+extension HKWorkoutActivityType: @retroactive CaseIterable {
     public static var allCases: [HKWorkoutActivityType] {
         return [
             .americanFootball,

@@ -9,41 +9,7 @@ import Foundation
 import WorkoutKit
 import HealthKit
 
-extension WorkoutGoal: CaseIterable, Identifiable {
-    public var id: UUID {
-        UUID()
-    }
-
-    var description: String {
-        switch self {
-        case let .distance(value, unit): return "Distance \(value) \(unit.unitSymbol)"
-        case let .time(value, unit): return "Time \(value) \(unit.unitSymbol)"
-        case let .energy(value, unit): return "Energy \(value) \(unit.unitSymbol)"
-        case .open: return "Open goal"
-        @unknown default: return "No goal"
-        }
-    }
-
-    // Case paths for enum optional associated values?
-    var unit: Dimension? {
-        switch self {
-        case .open: return nil
-        case let .distance(_, unitLength): return unitLength
-        case let .time(_, unitDuration): return unitDuration
-        case let .energy(_, unitEnergy): return unitEnergy
-        @unknown default: return nil
-        }
-    }
-
-    // Case paths for enum optional associated values?
-    var value: Double {
-        switch self {
-        case .open: return .zero
-        case let .distance(double, _), let .time(double, _), let .energy(double, _): return double
-        @unknown default: return .zero
-        }
-    }
-
+extension WorkoutGoal: @retroactive CaseIterable {
     public static var allCases: [WorkoutGoal] {
         return [
             .open,
@@ -51,16 +17,6 @@ extension WorkoutGoal: CaseIterable, Identifiable {
             .energy(1, .calories),
             .time(1,.seconds)
         ]
-    }
-
-    var supportedUnits: [Dimension] {
-        switch self {
-        case .distance: return [UnitLength.feet, UnitLength.meters, UnitLength.yards, UnitLength.kilometers, UnitLength.miles]
-        case .time: return [UnitDuration.seconds, UnitDuration.minutes, UnitDuration.hours]
-        case .energy: return [UnitEnergy.calories, UnitEnergy.kilocalories, UnitEnergy.joules, UnitEnergy.kilojoules, UnitEnergy.kilowattHours]
-        case .open: return []
-        @unknown default: return []
-        }
     }
 
     var `enum`: WorkoutGoalOptions {

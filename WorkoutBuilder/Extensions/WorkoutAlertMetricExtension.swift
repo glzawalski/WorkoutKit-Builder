@@ -7,7 +7,7 @@
 
 import WorkoutKit
 
-extension WorkoutAlertMetric: CaseIterable {
+extension WorkoutAlertMetric: @retroactive CaseIterable {
     public static var allCases: [WorkoutAlertMetric] {
         [.average, .current]
     }
@@ -16,6 +16,7 @@ extension WorkoutAlertMetric: CaseIterable {
         switch self {
         case .average: return "Average"
         case .current: return "Current"
+        @unknown default: return ""
         }
     }
 }

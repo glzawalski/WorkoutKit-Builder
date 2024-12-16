@@ -8,21 +8,7 @@
 import Foundation
 import WorkoutKit
 
-extension IntervalStep: Identifiable {
-    public var id: UUID {
-        return UUID()
-    }
-}
-
 extension IntervalStep.Purpose {
-    var icon: String {
-        switch self {
-        case .work: return "dumbbell"
-        case .recovery: return "zzz"
-        @unknown default: return ""
-        }
-    }
-
     var description: String {
         switch self {
         case .work: return "Work"

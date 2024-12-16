@@ -8,7 +8,7 @@
 import Foundation
 import HealthKit
 
-extension HKWorkoutSessionLocationType: CaseIterable {
+extension HKWorkoutSessionLocationType: @retroactive CaseIterable {
     public static var allCases: [HKWorkoutSessionLocationType] {
         return [.indoor, .outdoor]
     }
@@ -19,17 +19,6 @@ extension HKWorkoutSessionLocationType: CaseIterable {
         case .outdoor: return "Outdoor"
         case .unknown: return "Unknown"
         @unknown default: return "Unknown"
-        }
-    }
-}
-
-extension HKWorkoutSessionLocationType {
-    var displayImage: String {
-        switch self {
-        case .indoor: return "house"
-        case .outdoor: return "sun.horizon"
-        case .unknown: return "questionmark.circle"
-        @unknown default: return "questionmark.circle"
         }
     }
 }

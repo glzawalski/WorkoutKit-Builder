@@ -10,28 +10,6 @@ import WorkoutKit
 import HealthKit
 
 extension WorkoutAlert {
-    static var allCases: [any WorkoutAlert] {
-        let frequencyMin = Measurement(value: 1, unit: UnitFrequency.hertz)
-        let frequencyMax = Measurement(value: 2, unit: UnitFrequency.hertz)
-        let powerMin = Measurement(value: 1, unit: UnitPower.watts)
-        let powerMax = Measurement(value: 2, unit: UnitPower.watts)
-        let speedMin = Measurement(value: 1, unit: UnitSpeed.metersPerSecond)
-        let speedMax = Measurement(value: 2, unit: UnitSpeed.metersPerSecond)
-        let metric = WorkoutAlertMetric.average
-
-        return [
-            HeartRateRangeAlert(target: frequencyMin...frequencyMax),
-            HeartRateZoneAlert(zone: 1),
-            CadenceThresholdAlert(target: frequencyMin),
-            CadenceRangeAlert(target: frequencyMin...frequencyMax),
-            PowerThresholdAlert(target: powerMin),
-            PowerRangeAlert(target: powerMin...powerMax),
-            PowerZoneAlert(zone: 1),
-            SpeedThresholdAlert(target: speedMin, metric: metric),
-            SpeedRangeAlert(target: speedMin...speedMax, metric: metric)
-        ]
-    }
-
     var description: String {
         switch self {
         case is HeartRateRangeAlert:
@@ -80,43 +58,6 @@ extension WorkoutAlert {
         default:
             return nil
         }
-    }
-
-    var supportedUnits: [Dimension] {
-        switch self {
-        case is HeartRateRangeAlert:
-            return UnitFrequency.allCases
-        case is HeartRateZoneAlert:
-            return []
-        case is CadenceThresholdAlert:
-            return UnitFrequency.allCases
-        case is CadenceRangeAlert:
-            return UnitFrequency.allCases
-        case is PowerThresholdAlert:
-            return UnitPower.allCases
-        case is PowerRangeAlert:
-            return UnitPower.allCases
-        case is PowerZoneAlert:
-            return []
-        case is SpeedThresholdAlert:
-            return UnitSpeed.allCases
-        case is SpeedRangeAlert:
-            return UnitSpeed.allCases
-        default:
-            return []
-        }
-    }
-}
-
-extension HeartRateRangeAlert {
-    public static var supportedUnits: [UnitFrequency] {
-        return UnitFrequency.allCases
-    }
-}
-
-extension CadenceRangeAlert {
-    public static var supportedUnits: [UnitFrequency] {
-        return UnitFrequency.allCases
     }
 }
 
