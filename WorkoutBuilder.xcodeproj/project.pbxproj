@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3B42B6C9C41006E81FE /* StringExtension.swift */; };
 		7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3BF2B6F1D5F006E81FE /* GoalType.swift */; };
-		7801D3E62B7EAFE0006E81FE /* DimensionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3E52B7EAFE0006E81FE /* DimensionExtensions.swift */; };
 		7801D3E82B7EAFFE006E81FE /* WorkoutAlertExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3E72B7EAFFE006E81FE /* WorkoutAlertExtensions.swift */; };
 		7801D3ED2B7EEAB4006E81FE /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801D3EC2B7EEAB4006E81FE /* UnitExtensions.swift */; };
 		78943A952D037BD500F14C75 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943A942D037BC600F14C75 /* WorkoutList.swift */; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		7801D3B42B6C9C41006E81FE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		7801D3BF2B6F1D5F006E81FE /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
-		7801D3E52B7EAFE0006E81FE /* DimensionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionExtensions.swift; sourceTree = "<group>"; };
 		7801D3E72B7EAFFE006E81FE /* WorkoutAlertExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertExtensions.swift; sourceTree = "<group>"; };
 		7801D3EC2B7EEAB4006E81FE /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		78943A942D037BC600F14C75 /* WorkoutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 				78B1E57F2A46B30C00F17999 /* HKWorkoutActivityType.swift */,
 				78B1E5812A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift */,
 				7801D3B42B6C9C41006E81FE /* StringExtension.swift */,
-				7801D3E52B7EAFE0006E81FE /* DimensionExtensions.swift */,
 				7801D3E72B7EAFFE006E81FE /* WorkoutAlertExtensions.swift */,
 				7801D3EC2B7EEAB4006E81FE /* UnitExtensions.swift */,
 			);
@@ -249,7 +246,6 @@
 				78943AB12D0E908D00F14C75 /* RangeAlerts.swift in Sources */,
 				7801D3B52B6C9C41006E81FE /* StringExtension.swift in Sources */,
 				78943A9A2D0385FA00F14C75 /* AddWorkoutView.swift in Sources */,
-				7801D3E62B7EAFE0006E81FE /* DimensionExtensions.swift in Sources */,
 				7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */,
 				78943AAF2D0E904700F14C75 /* ZoneAlerts.swift in Sources */,
 				78943A9E2D07598100F14C75 /* AddGoalAlertView.swift in Sources */,
