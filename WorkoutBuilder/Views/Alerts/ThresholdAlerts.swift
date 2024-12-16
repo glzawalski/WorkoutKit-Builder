@@ -12,13 +12,17 @@ struct ThresholdAlerts: View {
     @Binding var workoutStep: WorkoutStep
     @Binding var alert: WorkoutAlertEnum?
 
-    @State private var frequency = Measurement(value: 1, unit: UnitFrequency.hertz)
-    @State private var power = Measurement(value: 1, unit: UnitPower.watts)
+    @State private var frequencyValue: Double = 1
+    @State private var frequencyUnit: UnitFrequency = .hertz
+
+    @State private var powerValue: Double = 1
+    @State private var powerUnit: UnitPower = .watts
+
     @State private var speedValue: Double = 1
     @State private var speedUnit: UnitSpeed = .metersPerSecond
     @State private var metric: WorkoutAlertMetric = .average
 
-    var body: some View {
+    var body: some View { 
         VStack {
             Text("Alert threshold value:")
 
@@ -32,38 +36,80 @@ struct ThresholdAlerts: View {
 }
 
 // MARK: - Frequency alert
-extension ThresholdAlerts {
+private extension ThresholdAlerts {
     private var frequencyAlert: some View {
-        TextField("Alert threshold value:", value: frequencyBinding, formatter: NumberFormatter())
-            .opacity(alert == .cadenceThreshold ? 1 : 0)
-            .frame(maxWidth: alert == .cadenceThreshold ? nil : 0, maxHeight: alert == .cadenceThreshold ? nil : 0)
+        HStack {
+            TextField("Alert threshold value:", value: frequencyValueBinding, formatter: NumberFormatter())
+            Picker("Frequency unit", selection: frequencyUnitBinding) {
+                ForEach(UnitFrequency.allCases, id: \.self) { unit in
+                    Text(unit.symbol)
+                        .tag(unit)
+                }
+            }
+        }
+        .opacity(alert == .cadenceThreshold ? 1 : 0)
+        .frame(maxWidth: alert == .cadenceThreshold ? nil : 0, maxHeight: alert == .cadenceThreshold ? nil : 0)
     }
 
-    var frequencyBinding: Binding<Measurement<UnitFrequency>> {
-        Binding(get: { frequency }, set: { updateFrequency($0) })
+    var frequencyValueBinding: Binding<Double> {
+        Binding(get: { frequencyValue }, set: { updateFrequencyValue($0) })
     }
 
-    func updateFrequency(_ frequency: Measurement<UnitFrequency>) {
-        self.frequency = frequency
-        workoutStep.alert = alert?.thresholdAlert(with: frequency)
+    func updateFrequencyValue(_ frequency: Double) {
+        frequencyValue = frequency
+//        workoutStep.alert = alert?.thresholdAlert(with: frequencyMeasurement)
+    }
+
+    var frequencyUnitBinding: Binding<UnitFrequency> {
+        Binding(get: { frequencyUnit }, set: { updateFrequencyUnit($0) })
+    }
+
+    func updateFrequencyUnit(_ unit: UnitFrequency) {
+        frequencyUnit = unit
+//        workoutStep.alert = alert?.thresholdAlert(with: frequencyMeasurement)
+    }
+
+    var frequencyMeasurement: Measurement<UnitFrequency> {
+        Measurement(value: frequencyValue, unit: frequencyUnit)
     }
 }
 
 // MARK: - Power alert
-extension ThresholdAlerts {
+private extension ThresholdAlerts {
     private var powerAlert: some View {
-        TextField("Alert threshold value:", value: powerBinding, formatter: NumberFormatter())
-            .opacity(alert == .powerThreshold ? 1 : 0)
-            .frame(maxWidth: alert == .powerThreshold ? nil : 0, maxHeight: alert == .powerThreshold ? nil : 0)
+        HStack {
+            TextField("Alert threshold value:", value: powerValueBinding, formatter: NumberFormatter())
+            Picker("Power unit", selection: powerUnitBinding) {
+                ForEach(UnitPower.allCases, id: \.self) { unit in
+                    Text(unit.symbol)
+                        .tag(unit)
+                }
+            }
+        }
+        .opacity(alert == .powerThreshold ? 1 : 0)
+        .frame(maxWidth: alert == .powerThreshold ? nil : 0, maxHeight: alert == .powerThreshold ? nil : 0)
     }
 
-    var powerBinding: Binding<Measurement<UnitPower>> {
-        Binding(get: { power }, set: { updatePower($0) })
+    var powerValueBinding: Binding<Double> {
+        Binding(get: { powerValue }, set: { updatePowerValue($0) })
     }
 
-    func updatePower(_ power: Measurement<UnitPower>) {
-        self.power = power
-        workoutStep.alert = alert?.thresholdAlert(with: power)
+    func updatePowerValue(_ power: Double) {
+        powerValue = power
+//        workoutStep.alert = alert?.thresholdAlert(with: powerMeasurement)
+    }
+
+    var powerUnitBinding: Binding<UnitPower> {
+        Binding(get: { powerUnit }, set: { updatePowerUnit($0) })
+    }
+
+    func updatePowerUnit(_ unit: UnitPower) {
+        powerUnit = unit
+//        workoutStep.alert = alert?.thresholdAlert(with: powerMeasurement)
+    }
+
+    var powerMeasurement: Measurement<UnitPower> {
+        Measurement(value: powerValue, unit: powerUnit)
     }
 }
 
@@ -97,7 +143,7 @@ private extension ThresholdAlerts {
 
     func updateSpeedValue(_ value: Double) {
         speedValue = value
-        workoutStep.alert = alert?.thresholdAlert(value: speedValue, unit: speedUnit, metric: metric)
+//        workoutStep.alert = alert?.thresholdAlert(with: speedMeasurement, metric: metric)
     }
 
     var speedUnitBinding: Binding<UnitSpeed> {
@@ -106,7 +152,7 @@ private extension ThresholdAlerts {
 
     func updateSpeedUnit(_ unit: UnitSpeed) {
         speedUnit = unit
-        workoutStep.alert = alert?.thresholdAlert(value: speedValue, unit: speedUnit, metric: metric)
+//        workoutStep.alert = alert?.thresholdAlert(with: speedMeasurement, metric: metric)
     }
 
     var speedMetricBinding: Binding<WorkoutAlertMetric> {
@@ -115,6 +161,10 @@ private extension ThresholdAlerts {
 
     func updateSpeedMetric(_ metric: WorkoutAlertMetric) {
         self.metric = metric
-        workoutStep.alert = alert?.thresholdAlert(value: speedValue, unit: speedUnit, metric: metric)
+//        workoutStep.alert = alert?.thresholdAlert(with: speedMeasurement, metric: metric)
+    }
+
+    var speedMeasurement: Measurement<UnitSpeed> {
+        Measurement(value: speedValue, unit: speedUnit)
     }
 }

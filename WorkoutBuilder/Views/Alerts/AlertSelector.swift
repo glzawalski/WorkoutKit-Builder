@@ -26,9 +26,9 @@ struct AlertSelector: View {
             Picker("Add an alert", selection: selectedAlertBinding) {
                 Text("None")
                     .tag(nil as WorkoutAlertEnum?)
-                ForEach(state.supportedAlerts, id: \.self) { alertEnum in
-                    Text(alertEnum.alert.description)
-                        .tag(alertEnum)
+                ForEach(state.supportedAlerts, id: \.self) { alert in
+                    Text(alert.rawValue)
+                        .tag(alert)
                 }
             }
             .pickerStyle(.inline)
@@ -45,7 +45,7 @@ struct AlertSelector: View {
             case .heartRateRange, .cadenceRange, .powerRange, .speedRange:
                 RangeAlerts(
                     workoutStep: $workoutStep,
-                    selectedAlert: $selectedAlert
+                    alert: $selectedAlert
                 )
             case .heartRateZone, .powerZone:
                 ZoneAlerts(

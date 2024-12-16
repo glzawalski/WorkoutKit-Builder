@@ -10,35 +10,8 @@ import WorkoutKit
 import HealthKit
 
 extension WorkoutAlert {
-    var description: String {
-        switch self {
-        case is HeartRateRangeAlert:
-            return "Heart rate range"
-        case is HeartRateZoneAlert:
-            return "Heart rate zone"
-        case is CadenceThresholdAlert:
-            return "Cadence threshold"
-        case is CadenceRangeAlert:
-            return "Cadence range"
-        case is PowerThresholdAlert:
-            return "Power threshold"
-        case is PowerRangeAlert:
-            return "Power range"
-        case is PowerZoneAlert:
-            return "Power zone"
-        case is SpeedThresholdAlert:
-            return "Speed threshold"
-        case is SpeedRangeAlert:
-            return "Speed range"
-        default:
-            return ""
-        }
-    }
-
     var `enum`: WorkoutAlertEnum? {
         switch self {
-        case is HeartRateRangeAlert:
-            return .heartRateRange
         case is HeartRateZoneAlert:
             return .heartRateZone
         case is CadenceThresholdAlert:
@@ -61,16 +34,16 @@ extension WorkoutAlert {
     }
 }
 
-enum WorkoutAlertEnum: CaseIterable {
-    case heartRateRange
-    case heartRateZone
-    case cadenceThreshold
-    case cadenceRange
-    case powerThreshold
-    case powerRange
-    case powerZone
-    case speedThreshold
-    case speedRange
+enum WorkoutAlertEnum: String, Hashable, CaseIterable {
+    case heartRateRange = "Heart rate range"
+    case heartRateZone = "Heart rate zone"
+    case cadenceThreshold = "Cadence threshold"
+    case cadenceRange = "Cadence range"
+    case powerThreshold = "Power threshold"
+    case powerRange = "Power range"
+    case powerZone = "Power zone"
+    case speedThreshold =  "Speed threshold"
+    case speedRange = "Speed range"
 
     var alert: any WorkoutAlert {
         let frequencyMin = Measurement(value: 1, unit: UnitFrequency.hertz)
@@ -101,72 +74,5 @@ enum WorkoutAlertEnum: CaseIterable {
         case .speedRange:
             return SpeedRangeAlert(target: speedMin...speedMax, metric: metric)
         }
-    }
-}
-
-// MARK: - Range alerts
-extension WorkoutAlertEnum {
-    func rangeAlert(with range: ClosedRange<Measurement<UnitFrequency>>) -> (any WorkoutAlert)? {
-        switch self {
-        case .heartRateRange:
-            return HeartRateRangeAlert(target: range)
-        case .cadenceRange:
-            return CadenceRangeAlert(target: range)
-        default:
-            return nil
-        }
-    }
-
-    func rangeAlert(with range: ClosedRange<Measurement<UnitPower>>) -> (any WorkoutAlert)? {
-        if case .powerRange = self {
-            return PowerRangeAlert(target: range)
-        }
-        return nil
-    }
-
-    func rangeAlert(with range: ClosedRange<Measurement<UnitSpeed>>, metric: WorkoutAlertMetric) -> (any WorkoutAlert)? {
-        if case .speedRange = self {
-            return SpeedRangeAlert(target: range, metric: metric)
-        }
-        return nil
-    }
-}
-
-// MARK: - Zone alerts
-extension WorkoutAlertEnum {
-    func zoneAlert(with zone: Int) -> (any WorkoutAlert)? {
-        switch self {
-        case .heartRateZone:
-            return HeartRateZoneAlert(zone: zone)
-        case .powerZone:
-            return PowerZoneAlert(zone: zone)
-        default:
-            return nil
-        }
-    }
-}
-
-// MARK: - Threshold alerts
-extension WorkoutAlertEnum {
-    func thresholdAlert(with target: Measurement<UnitFrequency>) -> (any WorkoutAlert)? {
-        if case .cadenceThreshold = self {
-            return CadenceThresholdAlert(target: target)
-        }
-        return nil
-    }
-
-    func thresholdAlert(with target: Measurement<UnitPower>) -> (any WorkoutAlert)? {
-        if case .powerThreshold = self {
-            return PowerThresholdAlert(target: target)
-        }
-        return nil
-    }
-
-    func thresholdAlert(value: Double, unit: UnitSpeed, metric: WorkoutAlertMetric) -> (any WorkoutAlert)? {
-        if case .speedThreshold = self {
-            let target = Measurement(value: value, unit: unit)
-            return SpeedThresholdAlert(target: target, metric: metric)
-        }
-        return nil
     }
 }
