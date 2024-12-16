@@ -38,7 +38,7 @@ struct AlertSelector: View {
             }
         }
         .onAppear {
-            selectedAlert = workoutStep.alert?.enum
+            selectedAlert = workoutStep.alert?.enumCase
         }
         .sheet(isPresented: $presentAlertInput) {
             switch selectedAlert {

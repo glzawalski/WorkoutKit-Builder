@@ -10,7 +10,7 @@ import WorkoutKit
 import HealthKit
 
 extension WorkoutAlert {
-    var `enum`: WorkoutAlertEnum? {
+    var enumCase: WorkoutAlertEnum? {
         switch self {
         case is HeartRateZoneAlert:
             return .heartRateZone
@@ -45,34 +45,18 @@ enum WorkoutAlertEnum: String, Hashable, CaseIterable {
     case speedThreshold =  "Speed threshold"
     case speedRange = "Speed range"
 
-    var alert: any WorkoutAlert {
-        let frequencyMin = Measurement(value: 1, unit: UnitFrequency.hertz)
-        let frequencyMax = Measurement(value: 2, unit: UnitFrequency.hertz)
-        let powerMin = Measurement(value: 1, unit: UnitPower.watts)
-        let powerMax = Measurement(value: 2, unit: UnitPower.watts)
-        let speedMin = Measurement(value: 1, unit: UnitSpeed.metersPerSecond)
-        let speedMax = Measurement(value: 2, unit: UnitSpeed.metersPerSecond)
-        let metric = WorkoutAlertMetric.average
-
-        switch self {
-        case .heartRateRange:
-            return HeartRateRangeAlert(target: frequencyMin...frequencyMax)
-        case .heartRateZone:
-            return HeartRateZoneAlert(zone: 1)
-        case .cadenceThreshold:
-            return CadenceThresholdAlert(target: frequencyMin)
-        case .cadenceRange:
-            return CadenceRangeAlert(target: frequencyMin...frequencyMax)
-        case .powerThreshold:
-            return PowerThresholdAlert(target: powerMin)
-        case .powerRange:
-            return PowerRangeAlert(target: powerMin...powerMax)
-        case .powerZone:
-            return PowerZoneAlert(zone: 1)
-        case .speedThreshold:
-            return SpeedThresholdAlert(target: speedMin, metric: metric)
-        case .speedRange:
-            return SpeedRangeAlert(target: speedMin...speedMax, metric: metric)
-        }
+    var alert: (any WorkoutAlert)? {
+        WorkoutAlertEnum.instanceFactory[self]
     }
+
+    static let instanceFactory: [WorkoutAlertEnum: any WorkoutAlert] = [
+        .heartRateRange: HeartRateRangeAlert.heartRate(1...2),
+        .heartRateZone: HeartRateZoneAlert.heartRate(zone: 1),
+        .cadenceThreshold: CadenceThresholdAlert.cadence(1),
+        .cadenceRange: CadenceRangeAlert.cadence(1...2),
+        .powerThreshold: PowerThresholdAlert.power(1, unit: .watts),
+        .powerRange: PowerRangeAlert.power(1...2, unit: .watts),
+        .powerZone: PowerZoneAlert.power(zone: 1),
+        .speedThreshold: SpeedThresholdAlert.speed(1, unit: .metersPerSecond),
+    ]
 }

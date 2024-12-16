@@ -285,20 +285,17 @@ extension HKWorkoutActivityType {
 // MARK: - Supported alerts
 extension HKWorkoutActivityType {
     func supportedAlerts(location: HKWorkoutSessionLocationType = .indoor) -> [WorkoutAlertEnum] {
-        WorkoutAlertEnum.allCases.map { alertEnum in
-            guard CustomWorkout.supportsAlert(alertEnum.alert, activity: self, location: location) else { return nil }
-            return alertEnum
-        }.compactMap { $0 }
+        WorkoutAlertEnum.allCases.filter { enumCase in
+            enumCase.alert?.supports(activity: self, location: location) ?? false
+        }
     }
 }
 
 // MARK: - Supported goals
 extension HKWorkoutActivityType {
     func supportedGoals(location: HKWorkoutSessionLocationType = .indoor) -> [WorkoutGoalOptions] {
-        WorkoutGoalOptions.allCases.map { goalOption in
-            guard CustomWorkout.supportsGoal(goalOption.goal(with: 1), activity: self, location: location) else { return nil }
-            return goalOption
+        WorkoutGoalOptions.allCases.filter { goalOption in
+            CustomWorkout.supportsGoal(goalOption.goal(with: 1), activity: self, location: location)
         }
-        .compactMap { $0 }
     }
 }
