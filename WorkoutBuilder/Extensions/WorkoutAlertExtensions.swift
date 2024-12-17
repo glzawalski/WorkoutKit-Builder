@@ -9,54 +9,46 @@ import Foundation
 import WorkoutKit
 import HealthKit
 
-extension WorkoutAlert {
-    var enumCase: WorkoutAlertEnum? {
-        switch self {
-        case is HeartRateZoneAlert:
-            return .heartRateZone
-        case is CadenceThresholdAlert:
-            return .cadenceThreshold
-        case is CadenceRangeAlert:
-            return .cadenceRange
-        case is PowerThresholdAlert:
-            return .powerThreshold
-        case is PowerRangeAlert:
-            return .powerRange
-        case is PowerZoneAlert:
-            return .powerZone
-        case is SpeedThresholdAlert:
-            return .speedThreshold
-        case is SpeedRangeAlert:
-            return .speedRange
-        default:
-            return nil
-        }
-    }
+protocol WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { get }
 }
 
-enum WorkoutAlertEnum: String, Hashable, CaseIterable {
-    case heartRateRange = "Heart rate range"
-    case heartRateZone = "Heart rate zone"
-    case cadenceThreshold = "Cadence threshold"
-    case cadenceRange = "Cadence range"
-    case powerThreshold = "Power threshold"
-    case powerRange = "Power range"
-    case powerZone = "Power zone"
-    case speedThreshold =  "Speed threshold"
-    case speedRange = "Speed range"
+extension HeartRateZoneAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .heartRateZone }
+}
 
-    var alert: (any WorkoutAlert)? {
-        WorkoutAlertEnum.instanceFactory[self]
-    }
+extension HeartRateRangeAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .heartRateRange }
+}
 
-    static let instanceFactory: [WorkoutAlertEnum: any WorkoutAlert] = [
-        .heartRateRange: HeartRateRangeAlert.heartRate(1...2),
-        .heartRateZone: HeartRateZoneAlert.heartRate(zone: 1),
-        .cadenceThreshold: CadenceThresholdAlert.cadence(1),
-        .cadenceRange: CadenceRangeAlert.cadence(1...2),
-        .powerThreshold: PowerThresholdAlert.power(1, unit: .watts),
-        .powerRange: PowerRangeAlert.power(1...2, unit: .watts),
-        .powerZone: PowerZoneAlert.power(zone: 1),
-        .speedThreshold: SpeedThresholdAlert.speed(1, unit: .metersPerSecond),
-    ]
+extension CadenceThresholdAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .cadenceThreshold }
+}
+
+extension CadenceRangeAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .cadenceRange }
+}
+
+extension PowerThresholdAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .powerThreshold }
+}
+
+extension PowerZoneAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .powerZone }
+}
+
+extension PowerRangeAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .powerRange }
+}
+
+extension SpeedThresholdAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .speedThreshold }
+}
+
+extension SpeedRangeAlert: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { .speedRange }
+}
+
+extension WorkoutAlert where Self: WorkoutAlertEnumRepresentable {
+    var enumCase: WorkoutAlertEnum? { self.enumCase }
 }

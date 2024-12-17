@@ -23,6 +23,7 @@
 		78943AAD2D0E8F6C00F14C75 /* ThresholdAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943AAC2D0E8F6600F14C75 /* ThresholdAlerts.swift */; };
 		78943AAF2D0E904700F14C75 /* ZoneAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943AAE2D0E904400F14C75 /* ZoneAlerts.swift */; };
 		78943AB12D0E908D00F14C75 /* RangeAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943AB02D0E908800F14C75 /* RangeAlerts.swift */; };
+		78943AB32D10C52600F14C75 /* WorkoutAlertEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78943AB22D10C52100F14C75 /* WorkoutAlertEnum.swift */; };
 		78B1E5802A46B30C00F17999 /* HKWorkoutActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1E57F2A46B30C00F17999 /* HKWorkoutActivityType.swift */; };
 		78B1E5822A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1E5812A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift */; };
 		78FDA3732A42983600A0EDF3 /* WorkoutBuilderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA3722A42983600A0EDF3 /* WorkoutBuilderApp.swift */; };
@@ -49,6 +50,7 @@
 		78943AAC2D0E8F6600F14C75 /* ThresholdAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdAlerts.swift; sourceTree = "<group>"; };
 		78943AAE2D0E904400F14C75 /* ZoneAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneAlerts.swift; sourceTree = "<group>"; };
 		78943AB02D0E908800F14C75 /* RangeAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeAlerts.swift; sourceTree = "<group>"; };
+		78943AB22D10C52100F14C75 /* WorkoutAlertEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAlertEnum.swift; sourceTree = "<group>"; };
 		78B1E57F2A46B30C00F17999 /* HKWorkoutActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKWorkoutActivityType.swift; sourceTree = "<group>"; };
 		78B1E5812A46B8BF00F17999 /* HKWorkoutSessionLocationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKWorkoutSessionLocationType.swift; sourceTree = "<group>"; };
 		78FDA36F2A42983600A0EDF3 /* WorkoutBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 		78FDA39A2A43CCFC00A0EDF3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				78943AB22D10C52100F14C75 /* WorkoutAlertEnum.swift */,
 				78943AA22D0E676A00F14C75 /* WorkoutAlertMetricExtension.swift */,
 				78FDA3962A43CB9000A0EDF3 /* IntervalStepExtension.swift */,
 				78FDA3982A43CC8100A0EDF3 /* WorkoutGoalExtension.swift */,
@@ -249,6 +252,7 @@
 				7801D3C02B6F1D5F006E81FE /* GoalType.swift in Sources */,
 				78943AAF2D0E904700F14C75 /* ZoneAlerts.swift in Sources */,
 				78943A9E2D07598100F14C75 /* AddGoalAlertView.swift in Sources */,
+				78943AB32D10C52600F14C75 /* WorkoutAlertEnum.swift in Sources */,
 				78943AA32D0E677400F14C75 /* WorkoutAlertMetricExtension.swift in Sources */,
 				78B1E5802A46B30C00F17999 /* HKWorkoutActivityType.swift in Sources */,
 				78943A982D03850900F14C75 /* Workout.swift in Sources */,

@@ -12,47 +12,88 @@ struct GoalSelector: View {
     @Environment(WorkoutBuilderAppState.self) var state
     @Binding var workoutStep: WorkoutStep
 
-    @State private var selectedGoal: WorkoutGoalOptions = .open
-    @State private var selectedGoalValue: Double = 1 // TODO: Ensure its never 0
-    @State private var presentGoalValueInput: Bool = false
-    
+    @State private var goal: WorkoutGoalOptions = .open
+    @State private var value: Double = 1 // TODO: Ensure its never 0
+    @State private var presentValueInput: Bool = false
+
     var body: some View {
-        let selectedGoalBinding = Binding(get: { selectedGoal },
-                                          set: { selectedGoal = $0; workoutStep.goal = $0.goal(with: selectedGoalValue) })
+        let goalBinding = Binding(get: { goal },
+                                  set: { goal = $0; workoutStep.goal = createGoal() })
 
         HStack {
             Text("Add a goal")
-            Text("\(selectedGoalValue)")
-                .opacity(selectedGoal == .open ? 0 : 1)
-                .frame(maxWidth: selectedGoal == .open ? 0 : nil)
-                .animation(.default, value: selectedGoal == .open)
+
+            Text("\(value)")
+                .opacity(goal == .open ? 0 : 1)
+                .frame(maxWidth: goal == .open ? 0 : nil)
+                .animation(.default, value: goal == .open)
+
             // TODO: Add custom segmented control picker with swappable options and resetting option
-            Picker("Add a goal", selection: selectedGoalBinding) {
+            Picker("Add a goal", selection: goalBinding) {
                 ForEach(state.supportedGoals, id: \.self) { goalOptions in
                     Text("\(goalOptions.rawValue)")
                         .tag(goalOptions)
                 }
             }
             .pickerStyle(.inline)
-            .onChange(of: selectedGoal) { _, newValue in
+            .onChange(of: goal) { _, newValue in
                 guard newValue != .open else { return }
-                presentGoalValueInput.toggle()
+                presentValueInput.toggle()
             }
         }
         .onAppear {
-            selectedGoal = workoutStep.goal.enum
+            goal = workoutStep.goal.enum
         }
-        .sheet(isPresented: $presentGoalValueInput) {
+        .sheet(isPresented: $presentValueInput) {
             goalValueInput
         }
     }
 
     private var goalValueInput: some View {
-        let selectedGoalValueBinding = Binding(get: { selectedGoalValue },
-                                               set: { selectedGoalValue = $0; workoutStep.goal = selectedGoal.goal(with: $0) })
+        let valueBinding = Binding(get: { value },
+                                   set: { value = $0; workoutStep.goal = createGoal() })
         return VStack {
             Text("Goal value:")
-            TextField("Goal value:", value: selectedGoalValueBinding, formatter: NumberFormatter())
+            TextField("Goal value:", value: valueBinding, formatter: NumberFormatter())
+        }
+    }
+}
+
+// MARK: - WorkoutAlert
+private extension GoalSelector {
+    func createGoal() -> WorkoutGoal {
+        switch goal {
+        case .open:
+            return .open
+
+        case .feet:
+            return .distance(value, .feet)
+        case .meters:
+            return .distance(value, .meters)
+        case .yards:
+            return .distance(value, .yards)
+        case .kilometers:
+            return .distance(value, .kilometers)
+        case .miles:
+            return .distance(value, .miles)
+
+        case .seconds:
+            return .time(value, .seconds)
+        case .minutes:
+            return .time(value, .minutes)
+        case .hours:
+            return .time(value, .hours)
+
+        case .calories:
+            return .energy(value, .calories)
+        case .kilocalories:
+            return .energy(value, .kilocalories)
+        case .joules:
+            return .energy(value, .joules)
+        case .kilojoules:
+            return .energy(value, .kilojoules)
+        case .kilowattHours:
+            return .energy(value, .kilowattHours)
         }
     }
 }

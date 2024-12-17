@@ -295,7 +295,7 @@ extension HKWorkoutActivityType {
 extension HKWorkoutActivityType {
     func supportedGoals(location: HKWorkoutSessionLocationType = .indoor) -> [WorkoutGoalOptions] {
         WorkoutGoalOptions.allCases.filter { goalOption in
-            CustomWorkout.supportsGoal(goalOption.goal(with: 1), activity: self, location: location)
+            CustomWorkout.supportsGoal(goalOption.goal, activity: self, location: location)
         }
     }
 }
